@@ -14,7 +14,6 @@ import {
   ChevronDown,
   Check,
   ArrowRight,
-  MessageSquare,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
@@ -43,8 +42,8 @@ const customStyles = `
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(99,102,241,0.4); }
-  50% { box-shadow: 0 0 60px rgba(99,102,241,0.6); }
+  0%, 100% { box-shadow: 0 0 20px rgba(201,168,76,0.3); }
+  50% { box-shadow: 0 0 40px rgba(201,168,76,0.5); }
 }
 @keyframes typing-cursor {
   0%, 100% { opacity: 1; }
@@ -83,13 +82,13 @@ const customStyles = `
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #6366F1, #06B6D4);
+  background: linear-gradient(135deg, #C9A84C, #D4954A);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 .gradient-text-animated {
-  background: linear-gradient(135deg, #6366F1, #06B6D4, #A78BFA, #6366F1);
+  background: linear-gradient(135deg, #C9A84C, #D4954A, #C9A84C);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -263,8 +262,7 @@ export function LandingPage() {
   /* ---- Testimonials ---- */
   const testimonials = [
     {
-      initials: "أ",
-      gradient: "from-[#6366F1] to-[#06B6D4]",
+      initials: "\u0623",
       name: "أحمد الرشيدي",
       role: "مهندس برمجيات",
       city: "الرياض",
@@ -272,8 +270,7 @@ export function LandingPage() {
       text: "كنت أرسل سيرتي دون ردود — حتى استخدمت بصير. حصلت على ٥ مقابلات في أسبوعين فقط!",
     },
     {
-      initials: "س",
-      gradient: "from-[#A78BFA] to-[#EC4899]",
+      initials: "\u0633",
       name: "سارة الفهد",
       role: "مديرة تسويق \u00B7 جدة",
       city: "جدة",
@@ -281,8 +278,7 @@ export function LandingPage() {
       text: "الدعم الكامل للغة العربية مذهل — أخيراً منصة تفهم RTL بشكل صحيح. سيرتي العربية تبدو احترافية جداً.",
     },
     {
-      initials: "م",
-      gradient: "from-[#06B6D4] to-[#10B981]",
+      initials: "\u0645",
       name: "محمد القاسم",
       role: "محلل مالي \u00B7 الدمام",
       city: "الدمام",
@@ -290,8 +286,7 @@ export function LandingPage() {
       text: "ميزة الذكاء الاصطناعي وفّرت عليّ ساعات. حوّلت نقاطي العادية إلى إنجازات مؤثرة. أنصح به بشدة!",
     },
     {
-      initials: "ف",
-      gradient: "from-[#F59E0B] to-[#F97316]",
+      initials: "\u0641",
       name: "فاطمة الناصر",
       role: "متخصصة موارد بشرية \u00B7 الرياض",
       city: "الرياض",
@@ -371,7 +366,7 @@ export function LandingPage() {
 
               <button
                 type="button"
-                className="rounded-full bg-gradient-to-r from-[#6366F1] to-[#06B6D4] px-6 py-2 text-sm font-semibold text-white animate-pulse-glow"
+                className="rounded-full bg-[#C9A84C] px-6 py-2 text-sm font-bold text-[#0A0A14] transition hover:bg-[#D4954A] animate-pulse-glow"
               >
                 {lang === "ar" ? "ابدأ مجاناً" : "Start Free"}
               </button>
@@ -423,7 +418,7 @@ export function LandingPage() {
                 </div>
                 <button
                   type="button"
-                  className="rounded-full bg-gradient-to-r from-[#6366F1] to-[#06B6D4] px-6 py-3 text-sm font-semibold text-white"
+                  className="rounded-full bg-[#C9A84C] px-6 py-3 text-sm font-bold text-[#0A0A14] transition hover:bg-[#D4954A]"
                 >
                   {lang === "ar" ? "ابدأ مجاناً" : "Start Free"}
                 </button>
@@ -436,10 +431,9 @@ export function LandingPage() {
         <section
           className={`relative min-h-screen overflow-hidden ${bg} flex items-center`}
         >
-          {/* Blobs */}
-          <div className="absolute -left-[10%] -top-[20%] h-[600px] w-[600px] rounded-full bg-[#6366F1]/20 blur-[120px] animate-blob" />
-          <div className="absolute -bottom-[20%] -right-[10%] h-[500px] w-[500px] rounded-full bg-[#06B6D4]/15 blur-[100px] animate-blob-reverse" />
-          <div className="absolute left-[40%] top-[40%] h-[300px] w-[300px] rounded-full bg-[#A78BFA]/10 blur-[80px] animate-blob-slow" />
+          {/* Blobs — gold + white only */}
+          <div className="absolute -left-[10%] -top-[20%] h-[600px] w-[600px] rounded-full bg-[#C9A84C]/10 blur-[120px] animate-blob" />
+          <div className="absolute -bottom-[20%] -right-[10%] h-[500px] w-[500px] rounded-full bg-white/5 blur-[100px] animate-blob-reverse" />
 
           <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-20 lg:px-8">
             <div className="grid items-center gap-12 lg:grid-cols-[1fr_auto]">
@@ -501,7 +495,7 @@ export function LandingPage() {
                 >
                   <button
                     type="button"
-                    className="group flex items-center gap-2 rounded-full bg-gradient-to-r from-[#6366F1] to-[#06B6D4] px-8 py-4 text-lg font-semibold text-white transition-transform hover:scale-105 animate-pulse-glow"
+                    className="group flex items-center gap-2 rounded-full bg-[#C9A84C] px-8 py-4 text-lg font-bold text-[#0A0A14] transition-transform hover:scale-105 hover:bg-[#D4954A] animate-pulse-glow"
                   >
                     <span style={{ fontFamily: "'Almarai', sans-serif" }}>
                       ابنِ سيرتي مجاناً
@@ -561,7 +555,7 @@ export function LandingPage() {
                           cy="50"
                           r="42"
                           fill="none"
-                          stroke="url(#atsGradient)"
+                          stroke="#C9A84C"
                           strokeWidth="8"
                           strokeLinecap="round"
                           strokeDasharray="248 264"
@@ -569,18 +563,6 @@ export function LandingPage() {
                             animation: "ats-ring 2s ease-out forwards",
                           }}
                         />
-                        <defs>
-                          <linearGradient
-                            id="atsGradient"
-                            x1="0%"
-                            y1="0%"
-                            x2="100%"
-                            y2="0%"
-                          >
-                            <stop offset="0%" stopColor="#6366F1" />
-                            <stop offset="100%" stopColor="#06B6D4" />
-                          </linearGradient>
-                        </defs>
                       </svg>
                       <div className="absolute inset-0 flex flex-col items-center justify-center">
                         <span className="text-3xl font-bold gradient-text">
@@ -622,7 +604,7 @@ export function LandingPage() {
                         </span>
                       </div>
                       <div
-                        className={`mt-1 inline-flex w-fit items-center rounded-full border border-green-500/20 bg-green-500/10 px-3 py-1 text-xs text-green-400`}
+                        className="mt-1 inline-flex w-fit items-center rounded-full border border-green-500/20 bg-green-500/10 px-3 py-1 text-xs text-green-400"
                       >
                         {"🎯 Top 5% of applicants"}
                       </div>
@@ -631,15 +613,15 @@ export function LandingPage() {
                 </div>
               </div>
 
-              {/* Floating CV Mockup (desktop) */}
+              {/* Floating CV Mockup */}
               <div className="hidden lg:block">
                 <div
-                  className={`animate-float w-[280px] overflow-hidden rounded-2xl border ${borderColor} shadow-2xl shadow-indigo-500/20`}
+                  className={`animate-float w-[280px] overflow-hidden rounded-2xl border ${borderColor} shadow-2xl shadow-[#C9A84C]/10`}
                 >
                   {/* CV header */}
                   <div className="bg-gradient-to-br from-[#1a1a2e] to-[#2d2d44] px-5 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#6366F1] to-[#06B6D4]" />
+                      <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#C9A84C] to-[#D4954A]" />
                       <div>
                         <div
                           className="text-sm font-bold text-white"
@@ -648,7 +630,7 @@ export function LandingPage() {
                           أحمد الرشيدي
                         </div>
                         <div className="text-xs text-white/60">
-                          Software Engineer
+                          {"Software Engineer · مهندس برمجيات"}
                         </div>
                       </div>
                     </div>
@@ -659,14 +641,15 @@ export function LandingPage() {
                       isDark ? "bg-[#12121e]" : "bg-white"
                     } p-5`}
                   >
+                    {/* Left gold accent border bar */}
                     <div className="mb-4 flex items-start gap-2">
-                      <div className="mt-1 w-1 self-stretch rounded bg-[#6366F1]" />
+                      <div className="mt-1 w-1 self-stretch rounded bg-[#C9A84C]" />
                       <div className="flex-1">
                         <div
-                          className="mb-2 text-xs font-bold text-[#6366F1]"
+                          className="mb-2 text-xs font-bold text-[#C9A84C]"
                           style={{ fontFamily: "'Almarai', sans-serif" }}
                         >
-                          الخبرات العملية
+                          الخبرات
                         </div>
                         <div
                           className={`mb-1.5 h-2 w-full rounded ${
@@ -686,10 +669,10 @@ export function LandingPage() {
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
-                      <div className="mt-1 w-1 self-stretch rounded bg-[#6366F1]" />
+                      <div className="mt-1 w-1 self-stretch rounded bg-[#C9A84C]" />
                       <div className="flex-1">
                         <div
-                          className="mb-2 text-xs font-bold text-[#6366F1]"
+                          className="mb-2 text-xs font-bold text-[#C9A84C]"
                           style={{ fontFamily: "'Almarai', sans-serif" }}
                         >
                           المهارات
@@ -744,7 +727,7 @@ export function LandingPage() {
         </section>
 
         {/* ======================= FEATURES BENTO ======================= */}
-        <section id="features" className={`${bg} py-24`}>
+        <section id="features" className={`${bg} py-16`}>
           <div className="mx-auto max-w-7xl px-4 lg:px-8">
             {/* Header */}
             <div className="slide-in-up text-center">
@@ -775,10 +758,10 @@ export function LandingPage() {
             <div className="mt-16 grid grid-cols-1 gap-4 md:grid-cols-3">
               {/* Cell 1 - ATS (col-span-2) */}
               <div
-                className={`slide-in-up col-span-1 rounded-2xl border ${borderColor} ${cardBg} p-6 transition-all duration-300 hover:shadow-[0_0_40px_rgba(99,102,241,0.3)] md:col-span-2`}
+                className={`slide-in-up col-span-1 rounded-2xl border ${borderColor} ${cardBg} p-6 transition-all duration-300 hover:shadow-[0_0_40px_rgba(201,168,76,0.15)] md:col-span-2`}
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#6366F1] to-[#6366F1]/60">
-                  <BarChart2 size={24} className="text-white" />
+                <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/8 border ${borderColor}`}>
+                  <BarChart2 size={24} className="text-[#C9A84C]" />
                 </div>
                 <h3
                   className={`text-xl font-bold ${textPrimary}`}
@@ -806,7 +789,7 @@ export function LandingPage() {
                     <div key={bar.label}>
                       <div className="flex items-center justify-between text-xs">
                         <span className={textSecondary}>{bar.label}</span>
-                        <span className="gradient-text font-semibold">
+                        <span className="text-[#C9A84C] font-semibold">
                           {bar.pct}%
                         </span>
                       </div>
@@ -816,7 +799,7 @@ export function LandingPage() {
                         }`}
                       >
                         <div
-                          className="h-full rounded-full bg-gradient-to-r from-[#6366F1] to-[#06B6D4]"
+                          className="h-full rounded-full bg-gradient-to-r from-[#C9A84C] to-[#D4954A]"
                           style={{
                             width: `${bar.pct}%`,
                             animation: "progress-fill 1.5s ease-out",
@@ -830,10 +813,10 @@ export function LandingPage() {
 
               {/* Cell 2 - AI Writing */}
               <div
-                className={`slide-in-up rounded-2xl border ${borderColor} ${cardBg} p-6 transition-all duration-300 hover:shadow-[0_0_40px_rgba(167,139,250,0.3)]`}
+                className={`slide-in-up rounded-2xl border ${borderColor} ${cardBg} p-6 transition-all duration-300 hover:shadow-[0_0_40px_rgba(201,168,76,0.15)]`}
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#A78BFA] to-[#A78BFA]/60">
-                  <Sparkles size={24} className="text-white" />
+                <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/8 border ${borderColor}`}>
+                  <Sparkles size={24} className="text-[#C9A84C]" />
                 </div>
                 <h3
                   className={`text-lg font-bold ${textPrimary}`}
@@ -857,17 +840,17 @@ export function LandingPage() {
                 >
                   <p className={`text-sm ${textSecondary}`}>
                     {"Improved customer satisfaction by"}
-                    <span className="animate-typing-cursor ml-0.5 inline-block h-4 w-0.5 bg-[#6366F1]" />
+                    <span className="animate-typing-cursor ml-0.5 inline-block h-4 w-0.5 bg-[#C9A84C]" />
                   </p>
                 </div>
               </div>
 
               {/* Cell 3 - Arabic-First */}
               <div
-                className={`slide-in-up rounded-2xl border ${borderColor} ${cardBg} p-6 transition-all duration-300 hover:shadow-[0_0_40px_rgba(6,182,212,0.3)]`}
+                className={`slide-in-up rounded-2xl border ${borderColor} ${cardBg} p-6 transition-all duration-300 hover:shadow-[0_0_40px_rgba(201,168,76,0.15)]`}
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#06B6D4] to-[#06B6D4]/60">
-                  <Globe2 size={24} className="text-white" />
+                <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/8 border ${borderColor}`}>
+                  <Globe2 size={24} className="text-[#C9A84C]" />
                 </div>
                 <h3
                   className={`text-lg font-bold ${textPrimary}`}
@@ -910,12 +893,12 @@ export function LandingPage() {
                 </div>
               </div>
 
-              {/* Cell 4 - Fast */}
+              {/* Cell 4 - Fast (10 minutes) with timeline */}
               <div
-                className={`slide-in-up rounded-2xl border ${borderColor} ${cardBg} p-6 transition-all duration-300 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)]`}
+                className={`slide-in-up rounded-2xl border ${borderColor} ${cardBg} p-6 transition-all duration-300 hover:shadow-[0_0_40px_rgba(201,168,76,0.15)]`}
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#F59E0B] to-[#F59E0B]/60">
-                  <Zap size={24} className="text-white" />
+                <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/8 border ${borderColor}`}>
+                  <Zap size={24} className="text-[#C9A84C]" />
                 </div>
                 <h3
                   className={`text-lg font-bold ${textPrimary}`}
@@ -929,14 +912,38 @@ export function LandingPage() {
                 >
                   لا تعقيد، لا ضياع
                 </p>
-                <div className="mt-4 flex items-end gap-1">
-                  <span className="text-6xl font-black gradient-text">10</span>
-                  <span
-                    className={`mb-2 text-sm ${textMuted}`}
-                    style={{ fontFamily: "'Almarai', sans-serif" }}
-                  >
-                    دقائق
-                  </span>
+                <div className="mt-4 flex gap-6">
+                  {/* Left: big number */}
+                  <div className="flex items-end gap-1">
+                    <span className="text-5xl font-black gradient-text">10</span>
+                    <span
+                      className={`mb-1 text-sm ${textMuted}`}
+                      style={{ fontFamily: "'Almarai', sans-serif" }}
+                    >
+                      دقائق
+                    </span>
+                  </div>
+                  {/* Right: vertical timeline */}
+                  <div className="flex flex-col gap-0">
+                    {[
+                      { time: "٣ دقائق", label: "املأ بياناتك" },
+                      { time: "٥ دقائق", label: "اختر القالب" },
+                      { time: "٢ دقائق", label: "حمّل سيرتك" },
+                    ].map((step, idx) => (
+                      <div key={idx} className="flex items-start gap-2">
+                        <div className="flex flex-col items-center">
+                          <div className="h-2.5 w-2.5 rounded-full bg-[#C9A84C] flex-shrink-0 mt-1" />
+                          {idx < 2 && (
+                            <div className="w-px h-5 bg-[#C9A84C]/40" />
+                          )}
+                        </div>
+                        <div className="flex items-center gap-1.5 pb-1">
+                          <span className="text-xs font-bold text-[#C9A84C]">{step.time}</span>
+                          <span className={`text-xs ${textMuted}`} style={{ fontFamily: "'Almarai', sans-serif" }}>{step.label}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -976,10 +983,10 @@ export function LandingPage() {
                       className="flex flex-col items-center text-center"
                     >
                       <div className="relative mb-3">
-                        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[#6366F1] to-[#06B6D4]">
-                          <step.icon size={24} className="text-white" />
+                        <div className={`flex h-14 w-14 items-center justify-center rounded-full bg-white/8 border ${borderColor}`}>
+                          <step.icon size={24} className="text-[#C9A84C]" />
                         </div>
-                        <span className="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-[#6366F1] text-xs font-bold text-white">
+                        <span className="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-[#C9A84C] bg-transparent text-xs font-bold text-[#C9A84C]">
                           {step.num}
                         </span>
                       </div>
@@ -1005,7 +1012,7 @@ export function LandingPage() {
             isDark
               ? "from-[#0A0A14] to-[#0D0D1A]"
               : "from-[#FAFAFA] to-[#F0F0F5]"
-          } py-24`}
+          } py-16`}
         >
           <div className="mx-auto max-w-7xl px-4 lg:px-8">
             {/* Header */}
@@ -1041,17 +1048,17 @@ export function LandingPage() {
                   key={plan.name}
                   className={`relative rounded-2xl border p-6 transition-all duration-300 ${
                     plan.popular
-                      ? `scale-100 sm:scale-105 z-10 border-transparent bg-gradient-to-b ${
+                      ? `scale-100 sm:scale-105 z-10 border-[#C9A84C]/30 ${
                           isDark
-                            ? "from-[#6366F1]/20 to-[#06B6D4]/10"
-                            : "from-[#6366F1]/10 to-[#06B6D4]/5"
-                        } shadow-xl shadow-indigo-500/10`
-                      : `${borderColor} ${cardBg} hover:border-indigo-500/50`
+                            ? "bg-[#C9A84C]/10"
+                            : "bg-[#C9A84C]/5"
+                        } shadow-xl shadow-[#C9A84C]/10`
+                      : `${borderColor} ${cardBg} hover:border-[#C9A84C]/50`
                   }`}
                 >
                   {plan.popular && (
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                      <span className="whitespace-nowrap rounded-full bg-gradient-to-r from-[#6366F1] to-[#06B6D4] px-4 py-1.5 text-xs font-bold text-white">
+                      <span className="whitespace-nowrap rounded-full bg-[#C9A84C] px-4 py-1.5 text-xs font-bold text-[#0A0A14]">
                         {"🔥 الأكثر اختياراً · Best Value"}
                       </span>
                     </div>
@@ -1082,9 +1089,7 @@ export function LandingPage() {
                       >
                         <Check
                           size={14}
-                          className={
-                            plan.popular ? "text-[#06B6D4]" : "text-[#6366F1]"
-                          }
+                          className="text-[#C9A84C]"
                         />
                         <span style={{ fontFamily: "'Almarai', sans-serif" }}>
                           {f}
@@ -1096,7 +1101,7 @@ export function LandingPage() {
                     type="button"
                     className={`mt-6 w-full rounded-full py-3 text-sm font-semibold transition ${
                       plan.popular
-                        ? "bg-gradient-to-r from-[#6366F1] to-[#06B6D4] text-white animate-pulse-glow"
+                        ? "bg-[#C9A84C] text-[#0A0A14] font-bold hover:bg-[#D4954A] animate-pulse-glow"
                         : `border ${borderColor} ${textSecondary} hover:${
                             isDark ? "bg-white/10" : "bg-black/5"
                           }`
@@ -1120,7 +1125,7 @@ export function LandingPage() {
         </section>
 
         {/* ======================= TESTIMONIALS ======================= */}
-        <section id="testimonials" className={`${bg} py-24`}>
+        <section id="testimonials" className={`${bg} py-16`}>
           <div className="mx-auto max-w-7xl px-4 lg:px-8">
             <div className="slide-in-up text-center">
               <span
@@ -1134,7 +1139,7 @@ export function LandingPage() {
                 className={`mt-4 text-3xl font-bold md:text-4xl ${textPrimary}`}
                 style={{ fontFamily: "'Almarai', sans-serif" }}
               >
-                {"+٢٤٠٠ مهني سعودي حصلوا على وظائفهم بالفعل"}
+                <span className="text-[#C9A84C]">{"+٢٤٠٠"}</span>{" مهني سعودي حصلوا على وظائفهم بالفعل"}
               </h2>
               <p className={`mt-2 text-sm ${textMuted}`}>
                 {"2,400+ Saudi Professionals Already Got Hired"}
@@ -1150,10 +1155,10 @@ export function LandingPage() {
                   <div className="flex items-center gap-3">
                     <div className="relative">
                       <div
-                        className={`flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br ${t.gradient} text-sm font-bold text-white`}
+                        className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-[#C9A84C] to-[#D4954A] text-sm font-bold text-[#0A0A14]"
                         style={{ fontFamily: "'Almarai', sans-serif" }}
                       >
-                        {t.initials}
+                        <span style={{ fontFamily: "'Almarai', sans-serif" }}>{t.initials}</span>
                       </div>
                       <span className="absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full border-2 border-[#0A0A14] bg-green-400" />
                     </div>
@@ -1193,7 +1198,7 @@ export function LandingPage() {
             </div>
 
             {/* Stats */}
-            <div className="mt-16 flex flex-col items-center justify-center gap-8 md:flex-row md:gap-12">
+            <div className="mt-12 flex flex-col items-center justify-center gap-8 md:flex-row md:gap-12">
               {[
                 { num: "+٢٤٠٠", label: "سيرة ذاتية أُنشئت" },
                 { num: "٩٤٪", label: "معدل اجتياز ATS" },
@@ -1209,7 +1214,7 @@ export function LandingPage() {
                   )}
                   <div className="text-center">
                     <div
-                      className="text-3xl font-bold gradient-text"
+                      className="text-3xl font-bold text-[#C9A84C]"
                       style={{ fontFamily: "'Almarai', sans-serif" }}
                     >
                       {stat.num}
@@ -1228,7 +1233,7 @@ export function LandingPage() {
         </section>
 
         {/* ======================= ROADMAP ======================= */}
-        <section className={`${bg2} py-20`}>
+        <section className={`${bg2} py-16`}>
           <div className="mx-auto max-w-7xl px-4 lg:px-8">
             <div className="slide-in-up text-center">
               <h2
@@ -1246,8 +1251,8 @@ export function LandingPage() {
               {[
                 {
                   badge: "✓ متاح الآن",
-                  badgeColor: "bg-green-500/10 text-green-400 border-green-500/20",
-                  dotColor: "bg-green-400",
+                  badgeColor: "bg-[#C9A84C]/10 text-[#C9A84C] border-[#C9A84C]/20",
+                  dotColor: "bg-[#C9A84C]",
                   items: [
                     "قوالب محسّنة لـ ATS",
                     "تصدير PDF و DOCX",
@@ -1257,9 +1262,8 @@ export function LandingPage() {
                 },
                 {
                   badge: "⏳ قريباً",
-                  badgeColor:
-                    "bg-indigo-500/10 text-indigo-400 border-indigo-500/20",
-                  dotColor: "bg-indigo-400",
+                  badgeColor: `${isDark ? "bg-white/5 text-white/60 border-white/10" : "bg-black/5 text-black/60 border-black/10"}`,
+                  dotColor: isDark ? "bg-white/40" : "bg-black/40",
                   items: [
                     "منشئ خطاب التغطية",
                     "محسّن ملف LinkedIn",
@@ -1269,9 +1273,8 @@ export function LandingPage() {
                 },
                 {
                   badge: "🔮 المستقبل",
-                  badgeColor:
-                    "bg-violet-500/10 text-violet-400 border-violet-500/20",
-                  dotColor: "bg-violet-400",
+                  badgeColor: `${isDark ? "bg-white/5 text-white/40 border-white/10" : "bg-black/5 text-black/40 border-black/10"}`,
+                  dotColor: isDark ? "bg-white/25" : "bg-black/25",
                   items: [
                     "السيرة الذاتية بالفيديو",
                     "منشئ الملف الشخصي",
@@ -1310,7 +1313,7 @@ export function LandingPage() {
         </section>
 
         {/* ======================= FAQ ======================= */}
-        <section id="faq" className={`${bg} py-20`}>
+        <section id="faq" className={`${bg} py-16`}>
           <div className="mx-auto max-w-3xl px-4 lg:px-8">
             <div className="slide-in-up text-center">
               <h2
@@ -1364,13 +1367,12 @@ export function LandingPage() {
         </section>
 
         {/* ======================= FINAL CTA ======================= */}
-        <section className={`relative overflow-hidden ${bg} py-28`}>
+        <section className={`relative overflow-hidden ${bg} py-20`}>
           {/* Blobs */}
-          <div className="absolute -left-[10%] -top-[20%] h-[400px] w-[400px] rounded-full bg-[#6366F1]/10 blur-[120px] animate-blob" />
-          <div className="absolute -bottom-[20%] -right-[10%] h-[350px] w-[350px] rounded-full bg-[#06B6D4]/10 blur-[100px] animate-blob-reverse" />
+          <div className="absolute -left-[10%] -top-[20%] h-[400px] w-[400px] rounded-full bg-[#C9A84C]/10 blur-[120px] animate-blob" />
+          <div className="absolute -bottom-[20%] -right-[10%] h-[350px] w-[350px] rounded-full bg-white/5 blur-[100px] animate-blob-reverse" />
 
           <div className="relative z-10 mx-auto max-w-4xl px-4 text-center lg:px-8">
-            <div className="animate-float mb-6 text-5xl">🚀</div>
             <h2
               className={`text-5xl font-bold md:text-6xl ${textPrimary}`}
               style={{ fontFamily: "'Almarai', sans-serif" }}
@@ -1393,7 +1395,7 @@ export function LandingPage() {
             </p>
             <button
               type="button"
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#6366F1] to-[#06B6D4] px-12 py-5 text-xl font-semibold text-white transition-transform hover:scale-105 animate-pulse-glow"
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#C9A84C] px-12 py-5 text-xl font-bold text-[#0A0A14] transition-transform hover:scale-105 hover:bg-[#D4954A] animate-pulse-glow"
               style={{ fontFamily: "'Almarai', sans-serif" }}
             >
               {"ابنِ سيرتي الذاتية مجاناً ←"}
@@ -1431,17 +1433,36 @@ export function LandingPage() {
                   ابنِ سيرتك. افتح أبوابك.
                 </p>
                 <div className="mt-4 flex gap-3">
-                  {/* Social icons */}
-                  {["WhatsApp", "X", "LinkedIn"].map((social) => (
-                    <button
-                      key={social}
-                      type="button"
-                      className={`flex h-9 w-9 items-center justify-center rounded-full border ${borderColor} ${textMuted} transition hover:border-indigo-500 hover:text-[#6366F1]`}
-                      aria-label={social}
-                    >
-                      <MessageSquare size={16} />
-                    </button>
-                  ))}
+                  {/* WhatsApp */}
+                  <a
+                    href="#"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-[#25D366] text-white transition hover:opacity-80"
+                    aria-label="WhatsApp"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                  </a>
+                  {/* X / Twitter */}
+                  <a
+                    href="#"
+                    className={`flex h-9 w-9 items-center justify-center rounded-full ${isDark ? "bg-white text-black" : "bg-black text-white"} transition hover:opacity-80`}
+                    aria-label="X"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                  </a>
+                  {/* LinkedIn */}
+                  <a
+                    href="#"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0077B5] text-white transition hover:opacity-80"
+                    aria-label="LinkedIn"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                  </a>
                 </div>
               </div>
 
