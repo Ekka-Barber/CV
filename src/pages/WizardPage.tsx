@@ -1,7 +1,6 @@
 import { useState, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import type { Resume } from "@/types/resume";
-import type { Locale } from "@/i18n/translations";
 import { Header } from "@/components/Layout/Header";
 import { WizardSteps } from "@/features/wizard/WizardSteps";
 import { useAppStore } from "@/store/useAppStore";
@@ -9,14 +8,10 @@ import { useTranslation } from "@/i18n/useTranslation";
 
 const STEPS = 10;
 
-interface WizardPageProps {
-  locale: Locale;
-  onLocaleChange: (l: Locale) => void;
-}
-
-export function WizardPage({ locale, onLocaleChange }: WizardPageProps) {
+export function WizardPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const locale = useAppStore((s) => s.locale);
   const { t } = useTranslation(locale);
   const guestResumes = useAppStore((s) => s.guestResumes);
   const updateGuestResume = useAppStore((s) => s.updateGuestResume);
@@ -60,7 +55,7 @@ export function WizardPage({ locale, onLocaleChange }: WizardPageProps) {
 
   return (
     <div className="min-h-screen bg-[var(--color-background)]">
-      <Header locale={locale} onLocaleChange={onLocaleChange} showAuth={false} />
+      <Header showAuth={false} />
       <main className="mx-auto max-w-2xl px-4 py-8">
         <div className="mb-6 flex items-center justify-between">
           <div className="flex gap-2 rounded border border-slate-200 p-0.5">
@@ -93,7 +88,6 @@ export function WizardPage({ locale, onLocaleChange }: WizardPageProps) {
         <div className="rounded-lg border border-slate-200 bg-white p-6">
           <WizardSteps
             step={step}
-            locale={locale}
             resume={currentResume}
             resumeId={id}
             easyMode={easyMode}

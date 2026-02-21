@@ -1,9 +1,11 @@
+import { useAppStore } from "@/store/useAppStore";
+
 interface LogoProps {
-  locale?: "en" | "ar";
   className?: string;
 }
 
-export function Logo({ locale = "en", className = "" }: LogoProps) {
+export function Logo({ className = "" }: LogoProps) {
+  const locale = useAppStore((s) => s.locale);
   const appName = locale === "ar" ? "منشئ السيرة الذاتية" : "CV Builder";
 
   return (

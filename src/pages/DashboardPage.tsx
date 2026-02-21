@@ -1,17 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/i18n/useTranslation";
-import type { Locale } from "@/i18n/translations";
 import type { Resume } from "@/types/resume";
 import { Header } from "@/components/Layout/Header";
 import { createEmptyResume } from "@/utils/createResume";
 import { useAppStore, generateId } from "@/store/useAppStore";
 
-interface DashboardPageProps {
-  locale: Locale;
-  onLocaleChange: (l: Locale) => void;
-}
-
-export function DashboardPage({ locale, onLocaleChange }: DashboardPageProps) {
+export function DashboardPage() {
+  const locale = useAppStore((s) => s.locale);
   const { t } = useTranslation(locale);
   const navigate = useNavigate();
   const guestResumes = useAppStore((s) => s.guestResumes);
@@ -53,7 +48,7 @@ export function DashboardPage({ locale, onLocaleChange }: DashboardPageProps) {
 
   return (
     <div className="min-h-screen bg-[var(--color-background)]">
-      <Header locale={locale} onLocaleChange={onLocaleChange} showAuth={false} />
+      <Header showAuth={false} />
       <main className="mx-auto max-w-4xl px-4 py-8">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-semibold text-slate-900">

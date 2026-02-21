@@ -1,16 +1,20 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "@/i18n/useTranslation";
-import type { Locale } from "@/i18n/translations";
 import { Header } from "@/components/Layout/Header";
 import { Logo } from "@/components/Layout/Logo";
+import { useAppStore } from "@/store/useAppStore";
 
-interface LandingPageProps {
-  locale: Locale;
-  onLocaleChange: (l: Locale) => void;
+function LandingLoader() {
+  return (
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600" />
+    </div>
+  );
 }
 
-export function LandingPage({ locale, onLocaleChange }: LandingPageProps) {
-  const { getNested } = useTranslation(locale);
+export function LandingPage() {
+  const locale = useAppStore((s) => s.locale);
+  const { getNested, isLoading } = useTranslation(locale);
   const isRTL = locale === "ar";
 
   const landing = getNested<{
@@ -59,11 +63,20 @@ export function LandingPage({ locale, onLocaleChange }: LandingPageProps) {
     };
   }>("landing");
 
+  if (isLoading || !landing.features) {
+    return (
+      <div className="min-h-screen bg-[var(--color-background)]">
+        <Header />
+        <LandingLoader />
+      </div>
+    );
+  }
+
   const { features, pricing, testimonials, roadmap, faq, footer } = landing;
 
   return (
     <div className="min-h-screen bg-[var(--color-background)]">
-      <Header locale={locale} onLocaleChange={onLocaleChange} />
+      <Header />
 
       <main>
         <section className="relative overflow-hidden bg-[var(--color-surface)]">
@@ -427,7 +440,7 @@ export function LandingPage({ locale, onLocaleChange }: LandingPageProps) {
         <div className="mx-auto max-w-6xl px-4">
           <div className="grid gap-8 md:grid-cols-4">
             <div className="md:col-span-1">
-              <Logo locale={locale} />
+              <Logo />
               <p className="mt-4 text-sm text-slate-600">
                 {footer.description}
               </p>

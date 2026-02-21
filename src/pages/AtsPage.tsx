@@ -1,17 +1,12 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import type { Locale } from "@/i18n/translations";
 import { Header } from "@/components/Layout/Header";
 import { useAppStore } from "@/store/useAppStore";
 import { useTranslation } from "@/i18n/useTranslation";
 
-interface AtsPageProps {
-  locale: Locale;
-  onLocaleChange: (l: Locale) => void;
-}
-
-export function AtsPage({ locale, onLocaleChange }: AtsPageProps) {
+export function AtsPage() {
   const { id } = useParams<{ id: string }>();
+  const locale = useAppStore((s) => s.locale);
   const { t } = useTranslation(locale);
   const guestResumes = useAppStore((s) => s.guestResumes);
   const resume = guestResumes.find((r) => r.id === id);
@@ -53,7 +48,7 @@ export function AtsPage({ locale, onLocaleChange }: AtsPageProps) {
 
   return (
     <div className="min-h-screen bg-[var(--color-background)]">
-      <Header locale={locale} onLocaleChange={onLocaleChange} showAuth={false} />
+      <Header showAuth={false} />
       <main className="mx-auto max-w-2xl px-4 py-8">
         <Link
           to={`/app/resume/${id}/editor`}

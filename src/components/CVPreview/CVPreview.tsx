@@ -62,7 +62,7 @@ export function CVPreview({ resume, lang = "en" }: CVPreviewProps) {
                 <p className="text-slate-600">{exp.company}</p>
                 <ul className="mt-1 list-disc pl-5">
                   {exp.bullets.filter(Boolean).map((b, i) => (
-                    <li key={i}>{b}</li>
+                    <li key={`${exp.id}-${i}`}>{b}</li>
                   ))}
                 </ul>
               </div>

@@ -1,16 +1,10 @@
 import { useState, useCallback, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import type { Resume } from "@/types/resume";
-import type { Locale } from "@/i18n/translations";
 import { Header } from "@/components/Layout/Header";
 import { CVPreview } from "@/components/CVPreview/CVPreview";
 import { useAppStore } from "@/store/useAppStore";
 import { useTranslation } from "@/i18n/useTranslation";
-
-interface EditorPageProps {
-  locale: Locale;
-  onLocaleChange: (l: Locale) => void;
-}
 
 function debounce<T extends (...args: unknown[]) => void>(fn: T, ms: number) {
   let t: ReturnType<typeof setTimeout>;
@@ -20,8 +14,9 @@ function debounce<T extends (...args: unknown[]) => void>(fn: T, ms: number) {
   };
 }
 
-export function EditorPage({ locale, onLocaleChange }: EditorPageProps) {
+export function EditorPage() {
   const { id } = useParams<{ id: string }>();
+  const locale = useAppStore((s) => s.locale);
   const { t } = useTranslation(locale);
   const guestResumes = useAppStore((s) => s.guestResumes);
   const updateGuestResume = useAppStore((s) => s.updateGuestResume);
@@ -65,7 +60,7 @@ export function EditorPage({ locale, onLocaleChange }: EditorPageProps) {
 
   return (
     <div className="min-h-screen bg-[var(--color-background)]">
-      <Header locale={locale} onLocaleChange={onLocaleChange} showAuth={false} />
+      <Header showAuth={false} />
       <div className="flex items-start justify-between gap-4 px-4 py-4">
         <aside className="sticky top-20 w-80 space-y-4 overflow-y-auto rounded-lg border border-slate-200 bg-white p-4">
           <div className="flex items-center justify-between">

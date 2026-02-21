@@ -1,17 +1,12 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "@/i18n/useTranslation";
-import type { Locale } from "@/i18n/translations";
 import { Header } from "@/components/Layout/Header";
 import { authApi } from "@/services/api";
 import { useAppStore } from "@/store/useAppStore";
 
-interface SignUpPageProps {
-  locale: Locale;
-  onLocaleChange: (l: Locale) => void;
-}
-
-export function SignUpPage({ locale, onLocaleChange }: SignUpPageProps) {
+export function SignUpPage() {
+  const locale = useAppStore((s) => s.locale);
   const { t } = useTranslation(locale);
   const navigate = useNavigate();
   const setUser = useAppStore((s) => s.setUser);
@@ -46,7 +41,7 @@ export function SignUpPage({ locale, onLocaleChange }: SignUpPageProps) {
 
   return (
     <div className="min-h-screen bg-[var(--color-background)]">
-      <Header locale={locale} onLocaleChange={onLocaleChange} />
+      <Header />
       <main className="mx-auto max-w-md px-4 py-12">
         <h1 className="text-2xl font-semibold text-slate-900">
           {t("auth.signUp")}

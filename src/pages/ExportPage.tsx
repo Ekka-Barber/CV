@@ -1,17 +1,12 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import type { Locale } from "@/i18n/translations";
 import { Header } from "@/components/Layout/Header";
 import { useAppStore } from "@/store/useAppStore";
 import { useTranslation } from "@/i18n/useTranslation";
 
-interface ExportPageProps {
-  locale: Locale;
-  onLocaleChange: (l: Locale) => void;
-}
-
-export function ExportPage({ locale, onLocaleChange }: ExportPageProps) {
+export function ExportPage() {
   const { id } = useParams<{ id: string }>();
+  const locale = useAppStore((s) => s.locale);
   const { t } = useTranslation(locale);
   const user = useAppStore((s) => s.user);
   const guestResumes = useAppStore((s) => s.guestResumes);
@@ -39,7 +34,7 @@ export function ExportPage({ locale, onLocaleChange }: ExportPageProps) {
 
   return (
     <div className="min-h-screen bg-[var(--color-background)]">
-      <Header locale={locale} onLocaleChange={onLocaleChange} showAuth={false} />
+      <Header showAuth={false} />
       <main className="mx-auto max-w-2xl px-4 py-8">
         <Link
           to={`/app/resume/${id}/editor`}

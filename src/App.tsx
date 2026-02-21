@@ -1,60 +1,57 @@
-import { useEffect } from "react";
+import { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useAppStore } from "@/store/useAppStore";
-import { LandingPage } from "@/pages/LandingPage";
-import { SignInPage } from "@/pages/auth/SignInPage";
-import { SignUpPage } from "@/pages/auth/SignUpPage";
-import { DashboardPage } from "@/pages/DashboardPage";
-import { WizardPage } from "@/pages/WizardPage";
-import { EditorPage } from "@/pages/EditorPage";
-import { AtsPage } from "@/pages/AtsPage";
-import { ExportPage } from "@/pages/ExportPage";
+
+const LandingPage = lazy(() =>
+  import("@/pages/LandingPage").then((m) => ({ default: m.LandingPage }))
+);
+const SignInPage = lazy(() =>
+  import("@/pages/auth/SignInPage").then((m) => ({ default: m.SignInPage }))
+);
+const SignUpPage = lazy(() =>
+  import("@/pages/auth/SignUpPage").then((m) => ({ default: m.SignUpPage }))
+);
+const DashboardPage = lazy(() =>
+  import("@/pages/DashboardPage").then((m) => ({ default: m.DashboardPage }))
+);
+const WizardPage = lazy(() =>
+  import("@/pages/WizardPage").then((m) => ({ default: m.WizardPage }))
+);
+const EditorPage = lazy(() =>
+  import("@/pages/EditorPage").then((m) => ({ default: m.EditorPage }))
+);
+const AtsPage = lazy(() =>
+  import("@/pages/AtsPage").then((m) => ({ default: m.AtsPage }))
+);
+const ExportPage = lazy(() =>
+  import("@/pages/ExportPage").then((m) => ({ default: m.ExportPage }))
+);
+
+function PageLoader() {
+  return (
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600" />
+    </div>
+  );
+}
 
 function App() {
-  const locale = useAppStore((s) => s.locale);
-  const setLocale = useAppStore((s) => s.setLocale);
-
-  useEffect(() => {
-    document.documentElement.lang = locale === "ar" ? "ar" : "en";
-    document.documentElement.dir = locale === "ar" ? "rtl" : "ltr";
-  }, [locale]);
+  useAppStore((s) => s.locale);
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={<LandingPage locale={locale} onLocaleChange={setLocale} />}
-        />
-        <Route
-          path="/auth/sign-in"
-          element={<SignInPage locale={locale} onLocaleChange={setLocale} />}
-        />
-        <Route
-          path="/auth/sign-up"
-          element={<SignUpPage locale={locale} onLocaleChange={setLocale} />}
-        />
-        <Route
-          path="/app"
-          element={<DashboardPage locale={locale} onLocaleChange={setLocale} />}
-        />
-        <Route
-          path="/app/resume/:id/wizard"
-          element={<WizardPage locale={locale} onLocaleChange={setLocale} />}
-        />
-        <Route
-          path="/app/resume/:id/editor"
-          element={<EditorPage locale={locale} onLocaleChange={setLocale} />}
-        />
-        <Route
-          path="/app/resume/:id/ats"
-          element={<AtsPage locale={locale} onLocaleChange={setLocale} />}
-        />
-        <Route
-          path="/app/resume/:id/export"
-          element={<ExportPage locale={locale} onLocaleChange={setLocale} />}
-        />
-      </Routes>
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/auth/sign-in" element={<SignInPage />} />
+          <Route path="/auth/sign-up" element={<SignUpPage />} />
+          <Route path="/app" element={<DashboardPage />} />
+          <Route path="/app/resume/:id/wizard" element={<WizardPage />} />
+          <Route path="/app/resume/:id/editor" element={<EditorPage />} />
+          <Route path="/app/resume/:id/ats" element={<AtsPage />} />
+          <Route path="/app/resume/:id/export" element={<ExportPage />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }

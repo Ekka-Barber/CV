@@ -1,10 +1,40 @@
-import { useMemo } from "react";
-import type { Locale } from "./translations";
-import { translations } from "./translations";
+import { useMemo, useEffect, useState } from "react";
+import type { Locale, Translations } from "./translations";
+import { loadLocale, getLocaleSync } from "./translations";
+
+const DEFAULT_LOCALE: Locale = "en";
+const EMPTY_TRANSLATIONS: Translations = {};
 
 export function useTranslation(locale: Locale) {
+  const [translations, setTranslations] = useState<Translations>(() => {
+    const cached = getLocaleSync(locale);
+    return cached ?? EMPTY_TRANSLATIONS;
+  });
+  const [isLoading, setIsLoading] = useState(() => !getLocaleSync(locale));
+
+  useEffect(() => {
+    const cached = getLocaleSync(locale);
+    if (cached) {
+      setTranslations(cached);
+      setIsLoading(false);
+      return;
+    }
+    
+    setIsLoading(true);
+    loadLocale(locale).then((loaded) => {
+      setTranslations(loaded);
+      setIsLoading(false);
+    });
+  }, [locale]);
+
+  useEffect(() => {
+    if (!getLocaleSync(DEFAULT_LOCALE)) {
+      loadLocale(DEFAULT_LOCALE);
+    }
+  }, []);
+
   return useMemo(() => {
-    const t = translations[locale];
+    const t = translations;
     
     const tr = (key: string): string => {
       const parts = key.split(".");
@@ -24,6 +54,6 @@ export function useTranslation(locale: Locale) {
       return val as T;
     };
     
-    return { t: tr, getNested, locale };
-  }, [locale]);
+    return { t: tr, getNested, locale, isLoading };
+  }, [translations, locale, isLoading]);
 }
