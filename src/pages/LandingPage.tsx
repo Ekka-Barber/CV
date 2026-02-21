@@ -15,6 +15,7 @@ import {
   Check,
   ArrowRight,
 } from "lucide-react";
+import { translations } from "./LandingPage.i18n";
 
 /* ------------------------------------------------------------------ */
 /*  Custom keyframes & animations (injected via <style>)              */
@@ -115,6 +116,11 @@ const customStyles = `
   --text-secondary: rgba(255,255,255,0.7);
   --text-muted: rgba(255,255,255,0.4);
 }
+
+/* RTL support */
+[dir="rtl"] .rtl-flip {
+  transform: scaleX(-1);
+}
 `;
 
 /* ------------------------------------------------------------------ */
@@ -126,6 +132,7 @@ export function LandingPage() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
+  const tr = translations[lang];
   const modeClass = isDark ? "dark-mode" : "light-mode";
 
   /* bg / text helpers based on mode */
@@ -171,141 +178,13 @@ export function LandingPage() {
     reobserve();
   }, [isDark, lang, reobserve]);
 
-  /* ---- FAQ data ---- */
-  const faqItems = [
-    {
-      q: "ما هو ATS ولماذا يهم؟ \u00B7 What is ATS and why does it matter?",
-      a: "ATS هو نظام تتبع المتقدمين الذي تستخدمه الشركات لفرز السير الذاتية تلقائياً. أكثر من ٧٥٪ من السير الذاتية لا تصل لمسؤول التوظيف بسبب هذه الفلاتر. بصير يضمن أن سيرتك تتجاوزها.",
-    },
-    {
-      q: "هل هناك اشتراك شهري؟ \u00B7 Is there a subscription?",
-      a: "لا إطلاقاً. تدفع مرة واحدة فقط وتحتفظ بسيرتك إلى الأبد. لا مفاجآت، لا رسوم خفية.",
-    },
-    {
-      q: "هل يمكنني إنشاء سيرة ذاتية بالعربية؟ \u00B7 Can I create an Arabic CV?",
-      a: "نعم! بصير هو أول منصة توفر دعماً حقيقياً للغة العربية — خط احترافي، اتجاه RTL صحيح، وتنسيق مناسب للسوق السعودي.",
-    },
-    {
-      q: "كيف تعمل ميزة الذكاء الاصطناعي؟ \u00B7 How does AI writing work?",
-      a: "أدخل تجربتك الخام وسيحوّلها الذكاء الاصطناعي إلى إنجازات مؤثرة موجّهة نحو النتائج — بلغة تُقنع مسؤولي التوظيف.",
-    },
-    {
-      q: "ما صيغ التصدير المتاحة؟ \u00B7 What export formats?",
-      a: "PDF و DOCX. جميع الملفات محسّنة ومرتبة بشكل صحيح لأنظمة ATS.",
-    },
-  ];
-
-  /* ---- Pricing data ---- */
-  const pricingPlans = [
-    {
-      badge: "مجاني للأبد",
-      name: "Free",
-      price: "0",
-      sub: "ابدأ من هنا",
-      features: ["سيرة ذاتية واحدة", "قوالب أساسية", "تصدير PDF", "فاحص ATS"],
-      cta: "ابدأ مجاناً",
-      popular: false,
-    },
-    {
-      badge: "للخريجين الجدد",
-      name: "Basic",
-      price: "49",
-      sub: "دفعة واحدة",
-      features: [
-        "3 سير ذاتية",
-        "جميع القوالب",
-        "PDF و DOCX",
-        "تحسين ATS",
-        "دعم أولوية",
-      ],
-      cta: "اختر Basic",
-      popular: false,
-    },
-    {
-      badge: "للمهنيين الجادين",
-      name: "Professional",
-      price: "99",
-      sub: "دفعة واحدة",
-      features: [
-        "10 سير ذاتية",
-        "جميع القوالب",
-        "PDF و DOCX",
-        "مساعد كتابة AI",
-        "تحسين ATS",
-        "منشئ خطاب التغطية",
-        "دعم أولوية",
-      ],
-      cta: "اختر Professional \u2192",
-      popular: true,
-    },
-    {
-      badge: "للمحترفين",
-      name: "Premium",
-      price: "199",
-      sub: "دفعة واحدة",
-      features: [
-        "سير ذاتية غير محدودة",
-        "جميع القوالب",
-        "PDF و DOCX",
-        "مساعد AI",
-        "تحسين ATS",
-        "خطاب تغطية",
-        "محسّن LinkedIn",
-        "مراجعة 1-on-1",
-        "دعم 24/7",
-      ],
-      cta: "اختر Premium",
-      popular: false,
-    },
-  ];
-
-  /* ---- Testimonials ---- */
-  const testimonials = [
-    {
-      initials: "\u0623",
-      name: "أحمد الرشيدي",
-      role: "مهندس برمجيات",
-      city: "الرياض",
-      stars: 5,
-      text: "كنت أرسل سيرتي دون ردود — حتى استخدمت بصير. حصلت على ٥ مقابلات في أسبوعين فقط!",
-    },
-    {
-      initials: "\u0633",
-      name: "سارة الفهد",
-      role: "مديرة تسويق \u00B7 جدة",
-      city: "جدة",
-      stars: 5,
-      text: "الدعم الكامل للغة العربية مذهل — أخيراً منصة تفهم RTL بشكل صحيح. سيرتي العربية تبدو احترافية جداً.",
-    },
-    {
-      initials: "\u0645",
-      name: "محمد القاسم",
-      role: "محلل مالي \u00B7 الدمام",
-      city: "الدمام",
-      stars: 5,
-      text: "ميزة الذكاء الاصطناعي وفّرت عليّ ساعات. حوّلت نقاطي العادية إلى إنجازات مؤثرة. أنصح به بشدة!",
-    },
-    {
-      initials: "\u0641",
-      name: "فاطمة الناصر",
-      role: "متخصصة موارد بشرية \u00B7 الرياض",
-      city: "الرياض",
-      stars: 5,
-      text: "بصفتي من تراجع السير الذاتية يومياً — هذه القوالب مصممة بذكاء. نظيفة، احترافية، وسهلة القراءة.",
-    },
-  ];
-
-  /* ---- Logo Bar ---- */
-  const logos =
-    "Saudi Aramco \u00B7 NEOM \u00B7 STC \u00B7 Mobily \u00B7 Elm \u00B7 SABIC \u00B7 PIF \u00B7 Tamimi \u00B7 Alfanar \u00B7 Accenture KSA \u00B7 McKinsey KSA \u00B7 Amazon KSA";
-
   return (
     <>
       <style>{customStyles}</style>
       <div
         className={`${modeClass} min-h-screen transition-colors duration-500`}
         style={{ fontFamily: "'Plus Jakarta Sans', 'Almarai', sans-serif" }}
-        dir="ltr"
+        dir={lang === "ar" ? "rtl" : "ltr"}
       >
         {/* ======================= NAVBAR ======================= */}
         <nav
@@ -329,13 +208,18 @@ export function LandingPage() {
 
             {/* Center nav (desktop) */}
             <div className="hidden items-center gap-8 md:flex">
-              {["Features", "Templates", "Pricing", "FAQ"].map((item) => (
+              {[
+                { key: "features", href: "#features" },
+                { key: "templates", href: "#templates" },
+                { key: "pricing", href: "#pricing" },
+                { key: "faq", href: "#faq" },
+              ].map((item) => (
                 <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
+                  key={item.key}
+                  href={item.href}
                   className={`text-sm ${textSecondary} hover:${textPrimary} transition-colors`}
                 >
-                  {item}
+                  {tr.nav[item.key as keyof typeof tr.nav]}
                 </a>
               ))}
             </div>
@@ -361,14 +245,14 @@ export function LandingPage() {
               </button>
 
               <button type="button" className={`text-sm ${textSecondary}`}>
-                Sign In
+                {tr.nav.signIn}
               </button>
 
               <button
                 type="button"
                 className="rounded-full bg-[#C9A84C] px-6 py-2 text-sm font-bold text-[#0A0A14] transition hover:bg-[#D4954A] animate-pulse-glow"
               >
-                {lang === "ar" ? "ابدأ مجاناً" : "Start Free"}
+                {tr.nav.startFree}
               </button>
             </div>
 
@@ -390,14 +274,19 @@ export function LandingPage() {
               } border-b ${borderColor} px-4 pb-6 pt-2`}
             >
               <div className="flex flex-col gap-4">
-                {["Features", "Templates", "Pricing", "FAQ"].map((item) => (
+                {[
+                  { key: "features", href: "#features" },
+                  { key: "templates", href: "#templates" },
+                  { key: "pricing", href: "#pricing" },
+                  { key: "faq", href: "#faq" },
+                ].map((item) => (
                   <a
-                    key={item}
-                    href={`#${item.toLowerCase()}`}
+                    key={item.key}
+                    href={item.href}
                     className={`text-sm ${textSecondary}`}
                     onClick={() => setMobileOpen(false)}
                   >
-                    {item}
+                    {tr.nav[item.key as keyof typeof tr.nav]}
                   </a>
                 ))}
                 <div className="flex items-center gap-3">
@@ -420,7 +309,7 @@ export function LandingPage() {
                   type="button"
                   className="rounded-full bg-[#C9A84C] px-6 py-3 text-sm font-bold text-[#0A0A14] transition hover:bg-[#D4954A]"
                 >
-                  {lang === "ar" ? "ابدأ مجاناً" : "Start Free"}
+                  {tr.nav.startFree}
                 </button>
               </div>
             </div>
@@ -446,7 +335,7 @@ export function LandingPage() {
                   } px-4 py-1.5`}
                 >
                   <span className={`text-xs ${textSecondary}`}>
-                    {"✦ مصمّم لسوق العمل السعودي — Built for the Saudi Job Market"}
+                    {tr.hero.badge}
                   </span>
                 </div>
 
@@ -459,20 +348,20 @@ export function LandingPage() {
                     className={`block text-5xl font-bold leading-tight md:text-7xl ${textPrimary}`}
                     style={{ fontFamily: "'Almarai', sans-serif" }}
                   >
-                    سيرتك الذاتية
+                    {tr.hero.title1}
                   </span>
                   <span
                     className="block text-5xl font-bold leading-tight gradient-text-animated md:text-7xl"
                     style={{ fontFamily: "'Almarai', sans-serif" }}
                   >
-                    بوابتك لأفضل الوظائف
+                    {tr.hero.title2}
                   </span>
                   <span
                     className={`mt-2 block text-3xl font-light md:text-5xl ${
                       isDark ? "text-white/80" : "text-[#1a1a2e]/80"
                     }`}
                   >
-                    Your CV. Your Future.
+                    {tr.hero.title3}
                   </span>
                 </h1>
 
@@ -484,8 +373,7 @@ export function LandingPage() {
                     fontFamily: "'Almarai', sans-serif",
                   }}
                 >
-                  صمّم سيرة ذاتية تتخطى فلاتر التوظيف وتصل مباشرةً للمدير
-                  المختص — في أقل من ١٠ دقائق
+                  {tr.hero.subtitle}
                 </p>
 
                 {/* CTAs */}
@@ -498,11 +386,11 @@ export function LandingPage() {
                     className="group flex items-center gap-2 rounded-full bg-[#C9A84C] px-8 py-4 text-lg font-bold text-[#0A0A14] transition-transform hover:scale-105 hover:bg-[#D4954A] animate-pulse-glow"
                   >
                     <span style={{ fontFamily: "'Almarai', sans-serif" }}>
-                      ابنِ سيرتي مجاناً
+                      {tr.hero.cta1}
                     </span>
                     <ArrowRight
                       size={20}
-                      className="transition-transform group-hover:translate-x-1"
+                      className={`transition-transform group-hover:translate-x-1 ${lang === "ar" ? "rotate-180" : ""}`}
                     />
                   </button>
                   <button
@@ -511,7 +399,7 @@ export function LandingPage() {
                       isDark ? "bg-white/10" : "bg-black/5"
                     }`}
                   >
-                    {"شاهد كيف يعمل ▶"}
+                    {tr.hero.cta2}
                   </button>
                 </div>
 
@@ -523,7 +411,7 @@ export function LandingPage() {
                     fontFamily: "'Almarai', sans-serif",
                   }}
                 >
-                  بدون بطاقة ائتمان · بدون اشتراك شهري · جاهز في ١٠ دقائق
+                  {tr.hero.trust}
                 </p>
 
                 {/* ATS Score Widget */}
@@ -569,7 +457,7 @@ export function LandingPage() {
                           94
                         </span>
                         <span className={`text-xs ${textMuted}`}>
-                          ATS Score
+                          {tr.hero.atsScore}
                         </span>
                       </div>
                     </div>
@@ -579,34 +467,34 @@ export function LandingPage() {
                       <div className="flex items-center gap-2">
                         <Check size={14} className="text-green-400" />
                         <span className={`text-sm ${textSecondary}`}>
-                          Formatting
+                          {tr.hero.formatting}
                         </span>
                         <span className="text-sm text-green-400">
-                          {"✓ Perfect"}
+                          {tr.hero.perfect}
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Check size={14} className="text-green-400" />
                         <span className={`text-sm ${textSecondary}`}>
-                          Keywords
+                          {tr.hero.keywords}
                         </span>
                         <span className="text-sm text-green-400">
-                          {"✓ Matched"}
+                          {tr.hero.matched}
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
                         <span className="h-2 w-2 rounded-full bg-yellow-400" />
                         <span className={`text-sm ${textSecondary}`}>
-                          Photo
+                          {tr.hero.photo}
                         </span>
                         <span className="text-sm text-yellow-400">
-                          {"⚠ Optional"}
+                          {tr.hero.optional}
                         </span>
                       </div>
                       <div
                         className="mt-1 inline-flex w-fit items-center rounded-full border border-green-500/20 bg-green-500/10 px-3 py-1 text-xs text-green-400"
                       >
-                        {"🎯 Top 5% of applicants"}
+                        {tr.hero.topApplicants}
                       </div>
                     </div>
                   </div>
@@ -620,20 +508,20 @@ export function LandingPage() {
                 >
                   {/* CV header */}
                   <div className="bg-gradient-to-br from-[#1a1a2e] to-[#2d2d44] px-5 py-4">
-                    <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#C9A84C] to-[#D4954A]" />
-                      <div>
-                        <div
-                          className="text-sm font-bold text-white"
-                          style={{ fontFamily: "'Almarai', sans-serif" }}
-                        >
-                          أحمد الرشيدي
-                        </div>
-                        <div className="text-xs text-white/60">
-                          {"Software Engineer · مهندس برمجيات"}
-                        </div>
-                      </div>
-                    </div>
+                      <div className="flex items-center gap-3">
+                       <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#C9A84C] to-[#D4954A]" />
+                       <div>
+                         <div
+                           className="text-sm font-bold text-white"
+                           style={{ fontFamily: "'Almarai', sans-serif" }}
+                         >
+                           {tr.hero.cvName}
+                         </div>
+                         <div className="text-xs text-white/60">
+                           {tr.hero.cvTitle}
+                         </div>
+                       </div>
+                     </div>
                   </div>
                   {/* CV body */}
                   <div
@@ -649,7 +537,7 @@ export function LandingPage() {
                           className="mb-2 text-xs font-bold text-[#C9A84C]"
                           style={{ fontFamily: "'Almarai', sans-serif" }}
                         >
-                          الخبرات
+                          {tr.hero.cvExp}
                         </div>
                         <div
                           className={`mb-1.5 h-2 w-full rounded ${
@@ -675,7 +563,7 @@ export function LandingPage() {
                           className="mb-2 text-xs font-bold text-[#C9A84C]"
                           style={{ fontFamily: "'Almarai', sans-serif" }}
                         >
-                          المهارات
+                          {tr.hero.cvSkills}
                         </div>
                         <div
                           className={`mb-1.5 h-2 w-3/4 rounded ${
@@ -708,19 +596,19 @@ export function LandingPage() {
           <p
             className={`mb-6 text-center text-sm uppercase tracking-[0.3em] ${textMuted}`}
           >
-            {"وُظِّف خبراؤنا في · OUR USERS WERE HIRED AT"}
+            {tr.logos.title}
           </p>
           <div className="relative overflow-hidden">
             <div className="animate-marquee flex whitespace-nowrap">
               <span
                 className={`mx-8 text-lg font-bold ${textMuted}`}
               >
-                {logos}
+                {tr.logos.companies}
               </span>
               <span
                 className={`mx-8 text-lg font-bold ${textMuted}`}
               >
-                {logos}
+                {tr.logos.companies}
               </span>
             </div>
           </div>
@@ -736,21 +624,20 @@ export function LandingPage() {
                   isDark ? "bg-white/5" : "bg-black/3"
                 } px-4 py-1.5 text-xs ${textSecondary}`}
               >
-                {"✦ المميزات · Features"}
+                {tr.features.badge}
               </span>
               <h2
                 className={`mt-4 text-4xl font-bold md:text-5xl ${textPrimary}`}
                 style={{ fontFamily: "'Almarai', sans-serif" }}
               >
-                {"كل ما تحتاجه للحصول على "}
-                <span className="gradient-text">وظيفة أحلامك</span>
+                {tr.features.title1}
+                <span className="gradient-text">{tr.features.title2}</span>
               </h2>
               <p
                 className={`mx-auto mt-3 max-w-lg ${textMuted}`}
                 style={{ fontFamily: "'Almarai', sans-serif" }}
               >
-                مصمّم خصيصًا للسوق السعودي — من شركات رؤية ٢٠٣٠ إلى الشركات
-                العالمية
+                {tr.features.subtitle}
               </p>
             </div>
 
@@ -767,17 +654,16 @@ export function LandingPage() {
                   className={`text-xl font-bold ${textPrimary}`}
                   style={{ fontFamily: "'Almarai', sans-serif" }}
                 >
-                  سيرتك تتجاوز كل الفلاتر الآلية
+                  {tr.features.ats.title}
                 </h3>
                 <p className={`text-sm ${textSecondary}`}>
-                  ATS-Optimized by Default
+                  {tr.features.ats.subtitle}
                 </p>
                 <p
                   className={`mt-2 text-sm leading-relaxed ${textMuted}`}
                   style={{ fontFamily: "'Almarai', sans-serif" }}
                 >
-                  قوالبنا مختبرة على أنظمة التوظيف في أرامكو السعودية ونيوم
-                  والشركات الكبرى. درجة تطابق أعلى = فرص أكثر.
+                  {tr.features.ats.desc}
                 </p>
                 {/* Progress bars */}
                 <div className="mt-6 flex flex-col gap-3">
@@ -822,16 +708,16 @@ export function LandingPage() {
                   className={`text-lg font-bold ${textPrimary}`}
                   style={{ fontFamily: "'Almarai', sans-serif" }}
                 >
-                  ذكاء اصطناعي يكتب عنك
+                  {tr.features.ai.title}
                 </h3>
                 <p className={`text-sm ${textSecondary}`}>
-                  AI Writing Assistant
+                  {tr.features.ai.subtitle}
                 </p>
                 <p
                   className={`mt-2 text-sm leading-relaxed ${textMuted}`}
                   style={{ fontFamily: "'Almarai', sans-serif" }}
                 >
-                  حوّل تجربتك إلى إنجازات لا يستطيع المسؤول تجاهلها — بضغطة زر.
+                  {tr.features.ai.desc}
                 </p>
                 <div
                   className={`mt-4 rounded-lg border ${borderColor} ${
@@ -839,8 +725,8 @@ export function LandingPage() {
                   } p-3`}
                 >
                   <p className={`text-sm ${textSecondary}`}>
-                    {"Improved customer satisfaction by"}
-                    <span className="animate-typing-cursor ml-0.5 inline-block h-4 w-0.5 bg-[#C9A84C]" />
+                    {tr.features.ai.demo}
+                    <span className="animate-typing-cursor ms-0.5 inline-block h-4 w-0.5 bg-[#C9A84C]" />
                   </p>
                 </div>
               </div>
@@ -856,17 +742,16 @@ export function LandingPage() {
                   className={`text-lg font-bold ${textPrimary}`}
                   style={{ fontFamily: "'Almarai', sans-serif" }}
                 >
-                  أول منصة تفهم العربية حقًا
+                  {tr.features.arabic.title}
                 </h3>
                 <p className={`text-sm ${textSecondary}`}>
-                  True Arabic-First
+                  {tr.features.arabic.subtitle}
                 </p>
                 <p
                   className={`mt-2 text-sm leading-relaxed ${textMuted}`}
                   style={{ fontFamily: "'Almarai', sans-serif" }}
                 >
-                  دعم كامل RTL، خط احترافي، وتنسيق صحيح. سيرتك العربية ستبدو
-                  كأنها صُمِّمت بيد محترف.
+                  {tr.features.arabic.desc}
                 </p>
                 {/* RTL preview */}
                 <div
@@ -904,13 +789,13 @@ export function LandingPage() {
                   className={`text-lg font-bold ${textPrimary}`}
                   style={{ fontFamily: "'Almarai', sans-serif" }}
                 >
-                  جاهز في ١٠ دقائق
+                  {tr.features.fast.title}
                 </h3>
                 <p
                   className={`mt-1 text-sm ${textMuted}`}
                   style={{ fontFamily: "'Almarai', sans-serif" }}
                 >
-                  لا تعقيد، لا ضياع
+                  {tr.features.fast.subtitle}
                 </p>
                 <div className="mt-4 flex gap-6">
                   {/* Left: big number */}
@@ -920,16 +805,12 @@ export function LandingPage() {
                       className={`mb-1 text-sm ${textMuted}`}
                       style={{ fontFamily: "'Almarai', sans-serif" }}
                     >
-                      دقائق
+                      {tr.features.fast.minutes}
                     </span>
                   </div>
                   {/* Right: vertical timeline */}
                   <div className="flex flex-col gap-0">
-                    {[
-                      { time: "٣ دقائق", label: "املأ بياناتك" },
-                      { time: "٥ دقائق", label: "اختر القالب" },
-                      { time: "٢ دقائق", label: "حمّل سيرتك" },
-                    ].map((step, idx) => (
+                    {tr.features.fast.steps.map((step, idx) => (
                       <div key={idx} className="flex items-start gap-2">
                         <div className="flex flex-col items-center">
                           <div className="h-2.5 w-2.5 rounded-full bg-[#C9A84C] flex-shrink-0 mt-1" />
@@ -955,27 +836,24 @@ export function LandingPage() {
                   className={`mb-6 text-xl font-bold ${textPrimary}`}
                   style={{ fontFamily: "'Almarai', sans-serif" }}
                 >
-                  كيف يعمل بصير؟
+                  {tr.features.howItWorks.title}
                 </h3>
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
                   {[
                     {
                       icon: FileText,
                       num: "1",
-                      ar: "أجب على أسئلة بسيطة",
-                      en: "Answer simple questions",
+                      text: tr.features.howItWorks.steps[0],
                     },
                     {
                       icon: Wand2,
                       num: "2",
-                      ar: "اختر قالبك",
-                      en: "Pick your template",
+                      text: tr.features.howItWorks.steps[1],
                     },
                     {
                       icon: Download,
                       num: "3",
-                      ar: "حمّل سيرتك فوراً",
-                      en: "Download instantly",
+                      text: tr.features.howItWorks.steps[2],
                     },
                   ].map((step) => (
                     <div
@@ -994,9 +872,9 @@ export function LandingPage() {
                         className={`font-semibold ${textPrimary}`}
                         style={{ fontFamily: "'Almarai', sans-serif" }}
                       >
-                        {step.ar}
+                        {lang === "ar" ? step.text.ar : step.text.en}
                       </p>
-                      <p className={`text-xs ${textMuted}`}>{step.en}</p>
+                      <p className={`text-xs ${textMuted}`}>{lang === "en" ? step.text.ar : step.text.en}</p>
                     </div>
                   ))}
                 </div>
@@ -1022,96 +900,96 @@ export function LandingPage() {
                   isDark ? "bg-white/5" : "bg-black/3"
                 } px-4 py-1.5 text-xs ${textSecondary}`}
               >
-                {"✦ الأسعار · Pricing"}
+                {tr.pricing.badge}
               </span>
               <h2
                 className="mt-4 text-4xl font-bold gradient-text-animated md:text-5xl"
                 style={{ fontFamily: "'Almarai', sans-serif" }}
               >
-                ادفع مرة واحدة. احتفظ بها للأبد.
+                {tr.pricing.title}
               </h2>
               <p
                 className={`mx-auto mt-3 max-w-lg text-sm ${textMuted}`}
                 style={{ fontFamily: "'Almarai', sans-serif" }}
               >
-                بينما المنافسون يشتركون شهريًا — أنت تدفع مرة واحدة فقط
-              </p>
-              <p className={`text-sm ${textMuted}`}>
-                One payment. Lifetime access. No subscriptions. No hidden fees.
+                {tr.pricing.subtitle}
               </p>
             </div>
 
             {/* Cards */}
             <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {pricingPlans.map((plan) => (
-                <div
-                  key={plan.name}
-                  className={`relative rounded-2xl border p-6 transition-all duration-300 ${
-                    plan.popular
-                      ? `scale-100 sm:scale-105 z-10 border-[#C9A84C]/30 ${
-                          isDark
-                            ? "bg-[#C9A84C]/10"
-                            : "bg-[#C9A84C]/5"
-                        } shadow-xl shadow-[#C9A84C]/10`
-                      : `${borderColor} ${cardBg} hover:border-[#C9A84C]/50`
-                  }`}
-                >
-                  {plan.popular && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                      <span className="whitespace-nowrap rounded-full bg-[#C9A84C] px-4 py-1.5 text-xs font-bold text-[#0A0A14]">
-                        {"🔥 الأكثر اختياراً · Best Value"}
-                      </span>
-                    </div>
-                  )}
+              {tr.pricing.plans.map((plan, idx) => {
+                const isPopular = idx === 2;
+                return (
                   <div
-                    className={`mb-1 text-xs font-semibold ${textMuted}`}
-                    style={{ fontFamily: "'Almarai', sans-serif" }}
-                  >
-                    {plan.badge}
-                  </div>
-                  <div className="flex items-end gap-1">
-                    <span className="text-4xl font-bold gradient-text">
-                      {plan.price}
-                    </span>
-                    <span className={`mb-1 text-sm ${textMuted}`}>ر.س</span>
-                  </div>
-                  <p
-                    className={`text-xs ${textMuted}`}
-                    style={{ fontFamily: "'Almarai', sans-serif" }}
-                  >
-                    {plan.sub}
-                  </p>
-                  <ul className="mt-5 flex flex-col gap-2.5">
-                    {plan.features.map((f, i) => (
-                      <li
-                        key={i}
-                        className={`flex items-center gap-2 text-sm ${textSecondary}`}
-                      >
-                        <Check
-                          size={14}
-                          className="text-[#C9A84C]"
-                        />
-                        <span style={{ fontFamily: "'Almarai', sans-serif" }}>
-                          {f}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                  <button
-                    type="button"
-                    className={`mt-6 w-full rounded-full py-3 text-sm font-semibold transition ${
-                      plan.popular
-                        ? "bg-[#C9A84C] text-[#0A0A14] font-bold hover:bg-[#D4954A] animate-pulse-glow"
-                        : `border ${borderColor} ${textSecondary} hover:${
-                            isDark ? "bg-white/10" : "bg-black/5"
-                          }`
+                    key={plan.name}
+                    className={`relative rounded-2xl border p-6 transition-all duration-300 ${
+                      isPopular
+                        ? `scale-100 sm:scale-105 z-10 border-[#C9A84C]/30 ${
+                            isDark
+                              ? "bg-[#C9A84C]/10"
+                              : "bg-[#C9A84C]/5"
+                          } shadow-xl shadow-[#C9A84C]/10`
+                        : `${borderColor} ${cardBg} hover:border-[#C9A84C]/50`
                     }`}
-                    style={{ fontFamily: "'Almarai', sans-serif" }}
                   >
-                    {plan.cta}
-                  </button>
-                </div>
-              ))}
+                    {isPopular && (
+                      <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                        <span className="whitespace-nowrap rounded-full bg-[#C9A84C] px-4 py-1.5 text-xs font-bold text-[#0A0A14]">
+                          {tr.pricing.popular}
+                        </span>
+                      </div>
+                    )}
+                    <div
+                      className={`mb-1 text-xs font-semibold ${textMuted}`}
+                      style={{ fontFamily: "'Almarai', sans-serif" }}
+                    >
+                      {plan.badge}
+                    </div>
+                    <div className="flex items-end gap-1">
+                      <span className="text-4xl font-bold gradient-text">
+                        {plan.price}
+                      </span>
+                      <span className={`mb-1 text-sm ${textMuted}`}>{tr.pricing.currency}</span>
+                    </div>
+                    <p
+                      className={`text-xs ${textMuted}`}
+                      style={{ fontFamily: "'Almarai', sans-serif" }}
+                    >
+                      {plan.sub}
+                    </p>
+                    <ul className="mt-5 flex flex-col gap-2.5">
+                      {plan.features.map((f, i) => (
+                        <li
+                          key={i}
+                          className={`flex items-center gap-2 text-sm ${textSecondary}`}
+                        >
+                          <Check
+                            size={14}
+                            className="text-[#C9A84C]"
+                          />
+                          <span style={{ fontFamily: "'Almarai', sans-serif" }}>
+                            {f}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                    <button
+                      type="button"
+                      className={`mt-6 w-full rounded-full py-3 text-sm font-semibold transition ${
+                        isPopular
+                          ? "bg-[#C9A84C] text-[#0A0A14] font-bold hover:bg-[#D4954A] animate-pulse-glow"
+                          : `border ${borderColor} ${textSecondary} hover:${
+                              isDark ? "bg-white/10" : "bg-black/5"
+                            }`
+                      }`}
+                      style={{ fontFamily: "'Almarai', sans-serif" }}
+                    >
+                      {plan.cta}
+                    </button>
+                  </div>
+                );
+              })}
             </div>
 
             {/* Trust row */}
@@ -1119,7 +997,7 @@ export function LandingPage() {
               className={`mt-8 text-center text-sm ${textMuted}`}
               style={{ fontFamily: "'Almarai', sans-serif" }}
             >
-              {"🔒 دفع آمن · Secure Payment | ✓ مدى وفيزا وآبل باي | ↩ ضمان استرداد ٧ أيام"}
+              {tr.pricing.trust}
             </p>
           </div>
         </section>
@@ -1133,21 +1011,21 @@ export function LandingPage() {
                   isDark ? "bg-white/5" : "bg-black/3"
                 } px-4 py-1.5 text-xs ${textSecondary}`}
               >
-                {"✦ آراء العملاء · Testimonials"}
+                {tr.testimonials.badge}
               </span>
               <h2
                 className={`mt-4 text-3xl font-bold md:text-4xl ${textPrimary}`}
                 style={{ fontFamily: "'Almarai', sans-serif" }}
               >
-                <span className="text-[#C9A84C]">{"+٢٤٠٠"}</span>{" مهني سعودي حصلوا على وظائفهم بالفعل"}
+                <span className="text-[#C9A84C]">{tr.testimonials.title1}</span>{" "}{tr.testimonials.title2}
               </h2>
               <p className={`mt-2 text-sm ${textMuted}`}>
-                {"2,400+ Saudi Professionals Already Got Hired"}
+                {tr.testimonials.titleEn}
               </p>
             </div>
 
             <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
-              {testimonials.map((t, i) => (
+              {tr.testimonials.items.map((testimonial, i) => (
                 <div
                   key={i}
                   className={`slide-in-up rounded-2xl border ${borderColor} ${cardBg} p-6 transition-transform hover:scale-[1.02]`}
@@ -1158,7 +1036,7 @@ export function LandingPage() {
                         className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-[#C9A84C] to-[#D4954A] text-sm font-bold text-[#0A0A14]"
                         style={{ fontFamily: "'Almarai', sans-serif" }}
                       >
-                        <span style={{ fontFamily: "'Almarai', sans-serif" }}>{t.initials}</span>
+                        <span style={{ fontFamily: "'Almarai', sans-serif" }}>{testimonial.initials}</span>
                       </div>
                       <span className="absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full border-2 border-[#0A0A14] bg-green-400" />
                     </div>
@@ -1167,18 +1045,18 @@ export function LandingPage() {
                         className={`font-semibold ${textPrimary}`}
                         style={{ fontFamily: "'Almarai', sans-serif" }}
                       >
-                        {t.name}
+                        {testimonial.name}
                       </div>
                       <div
                         className={`text-xs ${textMuted}`}
                         style={{ fontFamily: "'Almarai', sans-serif" }}
                       >
-                        {t.role}
+                        {testimonial.role}
                       </div>
                     </div>
                   </div>
                   <div className="mt-2 flex gap-0.5">
-                    {Array.from({ length: t.stars }).map((_, si) => (
+                    {Array.from({ length: 5 }).map((_, si) => (
                       <span key={si} className="text-amber-400">
                         {"★"}
                       </span>
@@ -1188,10 +1066,10 @@ export function LandingPage() {
                     className={`mt-3 text-sm leading-relaxed ${textSecondary}`}
                     style={{ fontFamily: "'Almarai', sans-serif" }}
                   >
-                    {`"${t.text}"`}
+                    {`"${testimonial.text}"`}
                   </p>
                   <div className={`mt-2 text-xs ${textMuted}`}>
-                    {"🇸🇦"} {t.city}
+                    {"🇸🇦"} {testimonial.city}
                   </div>
                 </div>
               ))}
@@ -1199,11 +1077,7 @@ export function LandingPage() {
 
             {/* Stats */}
             <div className="mt-12 flex flex-col items-center justify-center gap-8 md:flex-row md:gap-12">
-              {[
-                { num: "+٢٤٠٠", label: "سيرة ذاتية أُنشئت" },
-                { num: "٩٤٪", label: "معدل اجتياز ATS" },
-                { num: "+٨٠٪", label: "من المستخدمين حصلوا على مقابلات" },
-              ].map((stat, i) => (
+              {tr.testimonials.stats.map((stat, i) => (
                 <div key={i} className="flex items-center gap-8">
                   {i > 0 && (
                     <div
@@ -1240,47 +1114,32 @@ export function LandingPage() {
                 className={`text-3xl font-bold md:text-4xl ${textPrimary}`}
                 style={{ fontFamily: "'Almarai', sans-serif" }}
               >
-                {"ماذا ينتظرك قادمًا؟"}
+                {tr.roadmap.title}
               </h2>
               <p className={`mt-2 text-sm ${textMuted}`}>
-                {"What's Coming Next"}
+                {tr.roadmap.titleEn}
               </p>
             </div>
 
             <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
               {[
                 {
-                  badge: "✓ متاح الآن",
+                  badge: tr.roadmap.available,
                   badgeColor: "bg-[#C9A84C]/10 text-[#C9A84C] border-[#C9A84C]/20",
                   dotColor: "bg-[#C9A84C]",
-                  items: [
-                    "قوالب محسّنة لـ ATS",
-                    "تصدير PDF و DOCX",
-                    "مساعد كتابة بالذكاء الاصطناعي",
-                    "دعم كامل للغة العربية RTL",
-                  ],
+                  items: tr.roadmap.availableItems,
                 },
                 {
-                  badge: "⏳ قريباً",
+                  badge: tr.roadmap.coming,
                   badgeColor: `${isDark ? "bg-white/5 text-white/60 border-white/10" : "bg-black/5 text-black/60 border-black/10"}`,
                   dotColor: isDark ? "bg-white/40" : "bg-black/40",
-                  items: [
-                    "منشئ خطاب التغطية",
-                    "محسّن ملف LinkedIn",
-                    "تصاميم قوالب جديدة",
-                    "نصائح التحضير للمقابلات",
-                  ],
+                  items: tr.roadmap.comingItems,
                 },
                 {
-                  badge: "🔮 المستقبل",
+                  badge: tr.roadmap.future,
                   badgeColor: `${isDark ? "bg-white/5 text-white/40 border-white/10" : "bg-black/5 text-black/40 border-black/10"}`,
                   dotColor: isDark ? "bg-white/25" : "bg-black/25",
-                  items: [
-                    "السيرة الذاتية بالفيديو",
-                    "منشئ الملف الشخصي",
-                    "متتبع طلبات التوظيف",
-                    "لوحة تحليلات السيرة الذاتية",
-                  ],
+                  items: tr.roadmap.futureItems,
                 },
               ].map((col, ci) => (
                 <div
@@ -1320,12 +1179,12 @@ export function LandingPage() {
                 className={`text-3xl font-bold md:text-4xl ${textPrimary}`}
                 style={{ fontFamily: "'Almarai', sans-serif" }}
               >
-                {"الأسئلة الشائعة · FAQ"}
+                {tr.faq.title}
               </h2>
             </div>
 
             <div className="mt-12 flex flex-col gap-3">
-              {faqItems.map((item, i) => (
+              {tr.faq.items.map((item, i) => (
                 <div
                   key={i}
                   className={`slide-in-up overflow-hidden rounded-xl border ${borderColor} ${cardBg} transition-all duration-300`}
@@ -1333,7 +1192,7 @@ export function LandingPage() {
                   <button
                     type="button"
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className={`flex w-full items-center justify-between p-4 text-left text-sm font-medium ${textPrimary}`}
+                    className={`flex w-full items-center justify-between p-4 ${lang === "ar" ? "text-right" : "text-left"} text-sm font-medium ${textPrimary}`}
                     style={{ fontFamily: "'Almarai', sans-serif" }}
                   >
                     <span>{item.q}</span>
@@ -1377,34 +1236,34 @@ export function LandingPage() {
               className={`text-5xl font-bold md:text-6xl ${textPrimary}`}
               style={{ fontFamily: "'Almarai', sans-serif" }}
             >
-              <span>{"وظيفتك التالية "}</span>
-              <span className="gradient-text-animated">تبدأ بسيرة ذاتية</span>
+              <span>{tr.cta.title1}</span>
+              <span className="gradient-text-animated">{tr.cta.title2}</span>
             </h2>
             <p
               className={`mt-2 text-3xl font-light md:text-4xl ${
                 isDark ? "text-white/80" : "text-[#1a1a2e]/80"
               }`}
             >
-              Your Next Job Starts Here
+              {tr.cta.titleEn}
             </p>
             <p
               className={`mt-4 ${textMuted}`}
               style={{ fontFamily: "'Almarai', sans-serif" }}
             >
-              انضم إلى آلاف المهنيين السعوديين الذين وجدوا وظائفهم مع بصير
+              {tr.cta.subtitle}
             </p>
             <button
               type="button"
               className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#C9A84C] px-12 py-5 text-xl font-bold text-[#0A0A14] transition-transform hover:scale-105 hover:bg-[#D4954A] animate-pulse-glow"
               style={{ fontFamily: "'Almarai', sans-serif" }}
             >
-              {"ابنِ سيرتي الذاتية مجاناً ←"}
+              {tr.cta.button}
             </button>
             <p
               className={`mt-3 text-xs ${textMuted}`}
               style={{ fontFamily: "'Almarai', sans-serif" }}
             >
-              بدون بطاقة ائتمان · بدون اشتراك · جاهز في ١٠ دقائق
+              {tr.cta.trust}
             </p>
           </div>
         </section>
@@ -1430,7 +1289,7 @@ export function LandingPage() {
                   className={`mt-2 text-sm ${textMuted}`}
                   style={{ fontFamily: "'Almarai', sans-serif" }}
                 >
-                  ابنِ سيرتك. افتح أبوابك.
+                  {tr.footer.tagline}
                 </p>
                 <div className="mt-4 flex gap-3">
                   {/* WhatsApp */}
@@ -1471,16 +1330,11 @@ export function LandingPage() {
                 <h4
                   className={`text-xs font-semibold uppercase tracking-widest ${textMuted}`}
                 >
-                  {"المنتج · Product"}
+                  {tr.footer.product}
                 </h4>
                 <ul className="mt-4 flex flex-col gap-2">
-                  {[
-                    "المميزات / Features",
-                    "القوالب / Templates",
-                    "الأسعار / Pricing",
-                    "الذكاء الاصطناعي / AI Features",
-                  ].map((link) => (
-                    <li key={link}>
+                  {tr.footer.productLinks.map((link, i) => (
+                    <li key={i}>
                       <a
                         href="#"
                         className={`text-sm ${
@@ -1501,15 +1355,11 @@ export function LandingPage() {
                 <h4
                   className={`text-xs font-semibold uppercase tracking-widest ${textMuted}`}
                 >
-                  {"الشركة · Company"}
+                  {tr.footer.company}
                 </h4>
                 <ul className="mt-4 flex flex-col gap-2">
-                  {[
-                    "من نحن / About",
-                    "التوظيف / Careers",
-                    "تواصل معنا / Contact",
-                  ].map((link) => (
-                    <li key={link}>
+                  {tr.footer.companyLinks.map((link, i) => (
+                    <li key={i}>
                       <a
                         href="#"
                         className={`text-sm ${
@@ -1530,16 +1380,11 @@ export function LandingPage() {
                 <h4
                   className={`text-xs font-semibold uppercase tracking-widest ${textMuted}`}
                 >
-                  {"الدعم · Support"}
+                  {tr.footer.support}
                 </h4>
                 <ul className="mt-4 flex flex-col gap-2">
-                  {[
-                    "مركز المساعدة / Help Center",
-                    "سياسة الخصوصية / Privacy Policy",
-                    "شروط الاستخدام / Terms",
-                    "سياسة الاسترداد / Refund Policy",
-                  ].map((link) => (
-                    <li key={link}>
+                  {tr.footer.supportLinks.map((link, i) => (
+                    <li key={i}>
                       <a
                         href="#"
                         className={`text-sm ${
@@ -1561,10 +1406,10 @@ export function LandingPage() {
               className={`mt-12 flex flex-col items-center justify-between gap-4 border-t ${borderColor} pt-6 sm:flex-row`}
             >
               <p className={`text-sm ${textMuted}`}>
-                {"© 2026 بصير | Baseer. جميع الحقوق محفوظة."}
+                {tr.footer.copyright}
               </p>
               <p className={`text-sm ${textMuted}`}>
-                {"🇸🇦 صُنع بـ ❤️ في المملكة العربية السعودية"}
+                {tr.footer.madeIn}
               </p>
             </div>
           </div>
