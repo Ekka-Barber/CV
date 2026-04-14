@@ -1,5 +1,3 @@
-# CV Builder - AI Coding Guidelines
-
 ## Approach
 - Think before acting. Read existing files before writing code.
 - Be concise in output but thorough in reasoning.
@@ -10,26 +8,24 @@
 - Keep solutions simple and direct.
 - User instructions always override this file.
 
-## Project Overview
-Arabic-first CV/Resume builder with RTL support, bilingual templates, and ATS optimization. Built with React 19 + TypeScript.
+## Output
+- Return code first. Explanation after, only if non-obvious.
+- No inline prose. Use comments sparingly - only where logic is unclear.
+- No boilerplate unless explicitly requested.
 
-## Tech Stack
-- **Language**: TypeScript (strict mode, noUnusedLocals, noUnusedParameters)
-- **Framework**: React 19
-- **Build**: Vite 7.3
-- **Styling**: Tailwind CSS v4 (via @tailwindcss/vite)
-- **State**: Zustand 5
-- **Routing**: React Router DOM v7
-- **Backend**: Supabase (auth), deployed on Vercel
-- **Path alias**: `@/*` -> `src/*`
+## Code Rules
+- Simplest working solution. No over-engineering.
+- No abstractions for single-use operations.
+- No speculative features or "you might also want..."
+- Read the file before modifying it. Never edit blind.
+- Three similar lines is better than a premature abstraction.
 
-## Commands
-- `npm run dev` - Start dev server (port 5173)
-- `npm run build` - Type-check + production build
-- `npm run preview` - Preview production build
+## Review Rules
+- State the bug. Show the fix. Stop.
+- No suggestions beyond the scope of the review.
+- No compliments on the code before or after the review.
 
-## Code Style
-- Arabic-first RTL layout — always consider RTL when styling
-- Use path alias `@/` for imports
-- Prefer Vitest if adding tests
-- Follow existing AGENTS.md guidelines for conventions
+## Formatting
+- No em dashes, smart quotes, or decorative Unicode symbols.
+- Plain hyphens and straight quotes only.
+- Code output must be copy-paste safe.
