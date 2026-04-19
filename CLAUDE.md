@@ -7,6 +7,8 @@
 - No sycophantic openers or closing fluff.
 - Keep solutions simple and direct.
 - User instructions always override this file.
+- For complex tasks, plan first then execute. Break into sub-50% context chunks.
+- Run lint/typecheck before declaring done.
 
 ## Output
 - Return code first. Explanation after, only if non-obvious.
@@ -29,3 +31,34 @@
 - No em dashes, smart quotes, or decorative Unicode symbols.
 - Plain hyphens and straight quotes only.
 - Code output must be copy-paste safe.
+
+## Think Before Coding
+**Don't assume. Don't hide confusion. Surface tradeoffs.**
+
+Before implementing:
+- State your assumptions explicitly. If uncertain, ask.
+- If multiple interpretations exist, present them - don't pick silently.
+- If a simpler approach exists, say so. Push back when warranted.
+- If something is unclear, stop. Name what's confusing. Ask.
+
+## Goal-Driven Execution
+**Define success criteria. Loop until verified.**
+
+Transform tasks into verifiable goals:
+- "Add validation" -> "Write tests for invalid inputs, then make them pass"
+- "Fix the bug" -> "Write a test that reproduces it, then make it pass"
+- "Refactor X" -> "Ensure tests pass before and after"
+
+For multi-step tasks, state a brief plan:
+1. [Step] -> verify: [check]
+2. [Step] -> verify: [check]
+3. [Step] -> verify: [check]
+
+Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
+
+## Memory
+- You have MemPalace (29 MCP tools). Run mempalace_status on first use.
+- Search past decisions: mempalace_search "topic" before re-deciding.
+- Save key decisions: mempalace_add_drawer after significant choices.
+- mempalace_kg_add for entity relationships.
+- AGENTS.md has project context. Do NOT duplicate it here.

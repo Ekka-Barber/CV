@@ -6,10 +6,12 @@ import { useTranslation } from "@/i18n/useTranslation";
 
 export function ExportPage() {
   const { id } = useParams<{ id: string }>();
-  const locale = useAppStore((s) => s.locale);
+  const { locale, user, guestResumes } = useAppStore((s) => ({
+    locale: s.locale,
+    user: s.user,
+    guestResumes: s.guestResumes,
+  }));
   const { t } = useTranslation(locale);
-  const user = useAppStore((s) => s.user);
-  const guestResumes = useAppStore((s) => s.guestResumes);
   const resume = guestResumes.find((r) => r.id === id);
   const [showLoginModal, setShowLoginModal] = useState(false);
 

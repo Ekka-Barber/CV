@@ -5,23 +5,41 @@ import type { Locale } from "@/i18n/translations";
 const STORAGE_KEY = "ats-cv-guest-resumes";
 const LOCALE_KEY = "ats-cv-locale";
 
+const guestResumesCache: { value: Resume[] | null } = { value: null };
+const localeCache: { value: Locale | null } = { value: null };
+
 function loadGuestResumes(): Resume[] {
+  if (guestResumesCache.value !== null) {
+    return guestResumesCache.value;
+  }
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return [];
+    if (!raw) {
+      guestResumesCache.value = [];
+      return [];
+    }
     const parsed = JSON.parse(raw) as unknown;
-    return Array.isArray(parsed) ? parsed : [];
+    const result = Array.isArray(parsed) ? parsed : [];
+    guestResumesCache.value = result;
+    return result;
   } catch {
+    guestResumesCache.value = [];
     return [];
   }
 }
 
 function saveGuestResumes(resumes: Resume[]) {
+  guestResumesCache.value = resumes;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(resumes));
 }
 
 function loadLocale(): Locale {
-  return (localStorage.getItem(LOCALE_KEY) as Locale) ?? "en";
+  if (localeCache.value !== null) {
+    return localeCache.value;
+  }
+  const stored = localStorage.getItem(LOCALE_KEY) as Locale | null;
+  localeCache.value = stored ?? "en";
+  return localeCache.value;
 }
 
 interface AppState {
@@ -40,6 +58,7 @@ interface AppState {
 export const useAppStore = create<AppState>((set, get) => ({
   locale: loadLocale(),
   setLocale: (locale) => {
+    localeCache.value = locale;
     localStorage.setItem(LOCALE_KEY, locale);
     document.documentElement.lang = locale === "ar" ? "ar" : "en";
     document.documentElement.dir = locale === "ar" ? "rtl" : "ltr";
@@ -47,7 +66,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   },
   user: null,
   setUser: (user) => set({ user }),
-  guestResumes: loadGuestResumes(),
+  guestResumes: [],
   loadGuestResumes: () => set({ guestResumes: loadGuestResumes() }),
   addGuestResume: (r) =>
     set((s) => {
@@ -73,7 +92,7 @@ export const useAppStore = create<AppState>((set, get) => ({
     const r = get().guestResumes.find((x) => x.id === id);
     if (!r) return null;
     const copy: Resume = {
-      ...JSON.parse(JSON.stringify(r)),
+      ...structuredClone(r),
       id: crypto.randomUUID(),
       title: `${r.title} (Copy)`,
       updatedAt: new Date().toISOString(),
@@ -85,4 +104,8 @@ export const useAppStore = create<AppState>((set, get) => ({
 
 export function generateId(): string {
   return crypto.randomUUID();
+}
+
+export function initializeStore() {
+  useAppStore.setState({ guestResumes: loadGuestResumes() });
 }

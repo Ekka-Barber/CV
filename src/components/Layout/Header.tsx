@@ -8,8 +8,10 @@ interface HeaderProps {
 }
 
 export function Header({ showAuth = true }: HeaderProps) {
-  const locale = useAppStore((s) => s.locale);
-  const setLocale = useAppStore((s) => s.setLocale);
+  const { locale, setLocale } = useAppStore((s) => ({
+    locale: s.locale,
+    setLocale: s.setLocale,
+  }));
   const { t } = useTranslation(locale);
 
   return (

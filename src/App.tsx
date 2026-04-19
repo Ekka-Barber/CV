@@ -1,6 +1,5 @@
 import { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useAppStore } from "@/store/useAppStore";
 
 const LandingPage = lazy(() =>
   import("@/pages/LandingPage").then((m) => ({ default: m.LandingPage }))
@@ -36,8 +35,6 @@ function PageLoader() {
 }
 
 function App() {
-  useAppStore((s) => s.locale);
-
   return (
     <BrowserRouter>
       <Suspense fallback={<PageLoader />}>

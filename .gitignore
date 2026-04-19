@@ -25,3 +25,15 @@ nul
 *.njsproj
 *.sln
 *.sw?
+
+
+# AI agent local files
+mempalace.yaml
+.opencode/
+.ralph-tui/
+nul
+NUL
+DATASET/
+test-results/
+demo_glm.py
+test_ekka.py

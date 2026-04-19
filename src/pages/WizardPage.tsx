@@ -11,10 +11,12 @@ const STEPS = 10;
 export function WizardPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const locale = useAppStore((s) => s.locale);
+  const { locale, guestResumes, updateGuestResume } = useAppStore((s) => ({
+    locale: s.locale,
+    guestResumes: s.guestResumes,
+    updateGuestResume: s.updateGuestResume,
+  }));
   const { t } = useTranslation(locale);
-  const guestResumes = useAppStore((s) => s.guestResumes);
-  const updateGuestResume = useAppStore((s) => s.updateGuestResume);
 
   const resume = guestResumes.find((r) => r.id === id);
   const [step, setStep] = useState(0);

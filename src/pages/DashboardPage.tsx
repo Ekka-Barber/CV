@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/i18n/useTranslation";
 import type { Resume } from "@/types/resume";
@@ -6,45 +7,46 @@ import { createEmptyResume } from "@/utils/createResume";
 import { useAppStore, generateId } from "@/store/useAppStore";
 
 export function DashboardPage() {
-  const locale = useAppStore((s) => s.locale);
-  const { t } = useTranslation(locale);
   const navigate = useNavigate();
-  const guestResumes = useAppStore((s) => s.guestResumes);
-  const addGuestResume = useAppStore((s) => s.addGuestResume);
-  const deleteGuestResume = useAppStore((s) => s.deleteGuestResume);
-  const duplicateGuestResume = useAppStore((s) => s.duplicateGuestResume);
+  const { locale, guestResumes, addGuestResume, deleteGuestResume, duplicateGuestResume } = 
+    useAppStore((s) => ({
+      locale: s.locale,
+      guestResumes: s.guestResumes,
+      addGuestResume: s.addGuestResume,
+      deleteGuestResume: s.deleteGuestResume,
+      duplicateGuestResume: s.duplicateGuestResume,
+    }));
+  const { t } = useTranslation(locale);
 
-  const resumes = guestResumes;
-
-  function handleCreate() {
-    const id = generateId();
-    const resume = createEmptyResume(id);
-    addGuestResume(resume);
-    navigate(`/app/resume/${id}/wizard`);
-  }
-
-  function handleOpen(id: string) {
-    navigate(`/app/resume/${id}/editor`);
-  }
-
-  function handleDuplicate(id: string) {
-    const copy = duplicateGuestResume(id);
-    if (copy) navigate(`/app/resume/${copy.id}/editor`);
-  }
-
-  function handleDelete(id: string) {
-    if (window.confirm(t("common.delete") + "?")) {
-      deleteGuestResume(id);
-    }
-  }
-
-  function formatDate(iso: string) {
+  const formatDate = useCallback((iso: string) => {
     try {
       return new Date(iso).toLocaleDateString(locale === "ar" ? "ar" : "en");
     } catch {
       return iso;
     }
-  }
+  }, [locale]);
+
+  const handleCreate = useCallback(() => {
+    const id = generateId();
+    const resume = createEmptyResume(id);
+    addGuestResume(resume);
+    navigate(`/app/resume/${id}/wizard`);
+  }, [addGuestResume, navigate]);
+
+  const handleOpen = useCallback((id: string) => {
+    navigate(`/app/resume/${id}/editor`);
+  }, [navigate]);
+
+  const handleDuplicate = useCallback((id: string) => {
+    const copy = duplicateGuestResume(id);
+    if (copy) navigate(`/app/resume/${copy.id}/editor`);
+  }, [duplicateGuestResume, navigate]);
+
+  const handleDelete = useCallback((id: string) => {
+    if (window.confirm(t("common.delete") + "?")) {
+      deleteGuestResume(id);
+    }
+  }, [deleteGuestResume, t]);
 
   return (
     <div className="min-h-screen bg-[var(--color-background)]">
@@ -62,7 +64,7 @@ export function DashboardPage() {
             {t("dashboard.createNew")}
           </button>
         </div>
-        {resumes.length === 0 ? (
+        {guestResumes.length === 0 ? (
           <div className="mt-12 rounded-lg border border-slate-200 bg-white p-12 text-center">
             <p className="text-slate-600">{t("dashboard.noResumes")}</p>
             <button
@@ -75,7 +77,7 @@ export function DashboardPage() {
           </div>
         ) : (
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            {resumes.map((r: Resume) => (
+            {guestResumes.map((r: Resume) => (
               <div
                 key={r.id}
                 className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm"

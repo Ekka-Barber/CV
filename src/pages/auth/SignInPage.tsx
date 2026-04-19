@@ -6,10 +6,12 @@ import { authApi } from "@/services/api";
 import { useAppStore } from "@/store/useAppStore";
 
 export function SignInPage() {
-  const locale = useAppStore((s) => s.locale);
-  const { t } = useTranslation(locale);
   const navigate = useNavigate();
-  const setUser = useAppStore((s) => s.setUser);
+  const { locale, setUser } = useAppStore((s) => ({
+    locale: s.locale,
+    setUser: s.setUser,
+  }));
+  const { t } = useTranslation(locale);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");

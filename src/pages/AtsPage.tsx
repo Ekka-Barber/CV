@@ -6,9 +6,11 @@ import { useTranslation } from "@/i18n/useTranslation";
 
 export function AtsPage() {
   const { id } = useParams<{ id: string }>();
-  const locale = useAppStore((s) => s.locale);
+  const { locale, guestResumes } = useAppStore((s) => ({
+    locale: s.locale,
+    guestResumes: s.guestResumes,
+  }));
   const { t } = useTranslation(locale);
-  const guestResumes = useAppStore((s) => s.guestResumes);
   const resume = guestResumes.find((r) => r.id === id);
 
   const [jobDesc, setJobDesc] = useState("");

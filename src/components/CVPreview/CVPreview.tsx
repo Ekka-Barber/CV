@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import type { Resume } from "@/types/resume";
 
 interface CVPreviewProps {
@@ -8,6 +9,31 @@ interface CVPreviewProps {
 export function CVPreview({ resume, lang = "en" }: CVPreviewProps) {
   const c = resume.contact;
   const dir = lang === "ar" ? "rtl" : "ltr";
+
+  const validExperience = useMemo(
+    () => resume.experience.filter((e) => e.jobTitle || e.company),
+    [resume.experience]
+  );
+
+  const validEducation = useMemo(
+    () => resume.education.filter((e) => e.degree || e.institution),
+    [resume.education]
+  );
+
+  const validCertifications = useMemo(
+    () => resume.certifications.filter((cert) => cert.name || cert.issuer),
+    [resume.certifications]
+  );
+
+  const validProjects = useMemo(
+    () => resume.projects?.filter((p) => p.name || p.description) ?? [],
+    [resume.projects]
+  );
+
+  const validLanguages = useMemo(
+    () => resume.languages?.filter((l) => l.name) ?? [],
+    [resume.languages]
+  );
 
   return (
     <div
@@ -44,101 +70,90 @@ export function CVPreview({ resume, lang = "en" }: CVPreviewProps) {
         </section>
       )}
 
-      {resume.experience.filter((e) => e.jobTitle || e.company).length > 0 && (
+      {validExperience.length > 0 && (
         <section className="mt-6">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--color-primary)]">
             Experience
           </h2>
-          {resume.experience
-            .filter((e) => e.jobTitle || e.company)
-            .map((exp) => (
-              <div key={exp.id} className="mt-4">
-                <div className="flex justify-between">
-                  <span className="font-medium">{exp.jobTitle}</span>
-                  <span className="text-sm text-slate-500">
-                    {exp.startDate} – {exp.current ? "Present" : exp.endDate}
-                  </span>
-                </div>
-                <p className="text-slate-600">{exp.company}</p>
-                <ul className="mt-1 list-disc pl-5">
-                  {exp.bullets.filter(Boolean).map((b, i) => (
-                    <li key={`${exp.id}-${i}`}>{b}</li>
-                  ))}
-                </ul>
+          {validExperience.map((exp) => (
+            <div key={exp.id} className="mt-4">
+              <div className="flex justify-between">
+                <span className="font-medium">{exp.jobTitle}</span>
+                <span className="text-sm text-slate-500">
+                  {exp.startDate} – {exp.current ? "Present" : exp.endDate}
+                </span>
               </div>
-            ))}
+              <p className="text-slate-600">{exp.company}</p>
+              <ul className="mt-1 list-disc pl-5">
+                {exp.bullets.filter(Boolean).map((b, i) => (
+                  <li key={`${exp.id}-${i}`}>{b}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </section>
       )}
 
-      {resume.education.filter((e) => e.degree || e.institution).length > 0 && (
+      {validEducation.length > 0 && (
         <section className="mt-6">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--color-primary)]">
             Education
           </h2>
-          {resume.education
-            .filter((e) => e.degree || e.institution)
-            .map((ed) => (
-              <div key={ed.id} className="mt-4">
-                <div className="flex justify-between">
-                  <span className="font-medium">{ed.degree}</span>
-                  <span className="text-sm text-slate-500">
-                    {ed.startDate} – {ed.endDate}
-                  </span>
-                </div>
-                <p className="text-slate-600">{ed.institution}</p>
+          {validEducation.map((ed) => (
+            <div key={ed.id} className="mt-4">
+              <div className="flex justify-between">
+                <span className="font-medium">{ed.degree}</span>
+                <span className="text-sm text-slate-500">
+                  {ed.startDate} – {ed.endDate}
+                </span>
               </div>
-            ))}
+              <p className="text-slate-600">{ed.institution}</p>
+            </div>
+          ))}
         </section>
       )}
 
-      {resume.certifications.filter((c) => c.name || c.issuer).length > 0 && (
+      {validCertifications.length > 0 && (
         <section className="mt-6">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--color-primary)]">
             Certifications
           </h2>
-          {resume.certifications
-            .filter((c) => c.name || c.issuer)
-            .map((cert) => (
-              <div key={cert.id} className="mt-4">
-                <span className="font-medium">{cert.name}</span>
-                <span className="text-slate-600"> – {cert.issuer}</span>
-                {cert.date && (
-                  <span className="text-sm text-slate-500"> ({cert.date})</span>
-                )}
-              </div>
-            ))}
+          {validCertifications.map((cert) => (
+            <div key={cert.id} className="mt-4">
+              <span className="font-medium">{cert.name}</span>
+              <span className="text-slate-600"> – {cert.issuer}</span>
+              {cert.date && (
+                <span className="text-sm text-slate-500"> ({cert.date})</span>
+              )}
+            </div>
+          ))}
         </section>
       )}
 
-      {resume.projects?.filter((p) => p.name || p.description).length ? (
+      {validProjects.length > 0 && (
         <section className="mt-6">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--color-primary)]">
             Projects
           </h2>
-          {resume.projects
-            ?.filter((p) => p.name || p.description)
-            .map((p) => (
-              <div key={p.id} className="mt-4">
-                <span className="font-medium">{p.name}</span>
-                <p className="text-slate-600">{p.description}</p>
-              </div>
-            ))}
+          {validProjects.map((p) => (
+            <div key={p.id} className="mt-4">
+              <span className="font-medium">{p.name}</span>
+              <p className="text-slate-600">{p.description}</p>
+            </div>
+          ))}
         </section>
-      ) : null}
+      )}
 
-      {resume.languages?.filter((l) => l.name).length ? (
+      {validLanguages.length > 0 && (
         <section className="mt-6">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--color-primary)]">
             Languages
           </h2>
           <p className="mt-1 text-slate-700">
-            {resume.languages
-              ?.filter((l) => l.name)
-              .map((l) => `${l.name} (${l.proficiency})`)
-              .join(", ")}
+            {validLanguages.map((l) => `${l.name} (${l.proficiency})`).join(", ")}
           </p>
         </section>
-      ) : null}
+      )}
     </div>
   );
 }
